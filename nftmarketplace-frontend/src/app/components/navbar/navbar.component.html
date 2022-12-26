@@ -1,0 +1,29 @@
+<nav (scroll)="onWindowScroll($event);" class="flex flex-shrink-0 justify-between items-center py-9 h-20" id="navbar">
+
+    <!-- Logo -->
+    <div class="flex justify-between items-center px-5 select-none">
+        <img src="../../../assets/logo/nft-logo.png" alt="nft-logo" />
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex items-center px-16 mx-8 select-none">
+        <input type="search" class="block px-4 py-2 select-none" placeholder="Search for Products..."
+            style="border: 0; border-radius: 20px; background-color: rgb(240, 240, 240);" />
+    </div>
+
+    <!-- Links -->
+    <ul class="flex flex-row justify-between items-center w-full mr-24">
+        <li class="my-5">home</li>
+        <li class="my-5">explores</li>
+        <li class="my-5">explores</li>
+        <li class="my-5">explores</li>
+        <li class="my-5">
+            <div class='flex items-center justify-center cursor-pointer select-none mb-5 md:mb-0'>
+        <li class="my-5"><fa-icon [icon]="faUser" size="lg"></fa-icon></li>
+        <img src="../../../assets/logo/nft-logo.svg" alt="profil-picture" width="40px" height="10px"
+            class='bg-transparent' />
+        </div>
+        </li>
+        <li class="my-5"><fa-icon [icon]="faShoppingCart" size="lg"></fa-icon></li>
+    </ul>
+</nav>

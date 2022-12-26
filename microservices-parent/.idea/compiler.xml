@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cart-service" />
+        <module name="category-service" />
+        <module name="nft-service" />
+        <module name="transaction-service" />
+        <module name="collection-service" />
+        <module name="user-service" />
+        <module name="wallet-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cart-service" options="-parameters" />
+      <module name="category-service" options="-parameters" />
+      <module name="collection-service" options="-parameters" />
+      <module name="nft-service" options="-parameters" />
+      <module name="transaction-service" options="-parameters" />
+      <module name="user-service" options="-parameters" />
+      <module name="wallet-service" options="-parameters" />
+    </option>
+  </component>
+</project>
