@@ -44,13 +44,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User findById(String id) {
-        Optional<User> us = userRepository.findById(id);
-        if (us.isPresent()) {
-            User u = us.get();
-            return u;
-        }
-        return null;
+    public Optional<User> findById(String id) {
+        return userRepository.findById(id);
     }
 
 }

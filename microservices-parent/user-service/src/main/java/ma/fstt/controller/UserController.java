@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -42,8 +43,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable("id") String id) {
-        User us = userService.findById(id);
-        return new ResponseEntity<>(us, HttpStatus.OK);
+    public Optional<User> findById(@PathVariable("id") String id) {
+        return userService.findById(id);
     }
 }
