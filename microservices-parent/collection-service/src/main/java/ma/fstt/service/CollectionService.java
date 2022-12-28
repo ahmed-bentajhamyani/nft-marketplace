@@ -5,6 +5,8 @@ import ma.fstt.repository.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,7 +23,7 @@ public class CollectionService {
     }
 
     public void createCategory(Collection col) {
-        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), col.getCategoryName());
+        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), col.getCategoryName(), LocalDate.now());
         collectionRepository.insert(collection);
     }
 

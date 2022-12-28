@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/nfts")
+@CrossOrigin(origins = "http://localhost:4200")
 public class NFTController {
     @Autowired
     private NFTService nftService;

@@ -7,6 +7,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,9 +25,10 @@ public class Collection {
     private String discord;
     private String twitter;
     private String categoryName;
+    private LocalDate createdAt;
 
 
-    public Collection(String name, String description, int items, String website, String discord, String twitter, String categoryName) {
+    public Collection(String name, String description, int items, String website, String discord, String twitter, String categoryName, LocalDate createdAt) {
         this.name = name;
         this.description = description;
         this.items = items;
@@ -32,5 +36,6 @@ public class Collection {
         this.discord = discord;
         this.twitter = twitter;
         this.categoryName = categoryName;
+        this.createdAt = createdAt;
     }
 }

@@ -20,7 +20,7 @@ import ma.fstt.repository.CartRepository;
 
 @RestController
 @RequestMapping(value="/api/cart")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200")
 public class CartController {
 	
 	@Autowired
