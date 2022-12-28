@@ -24,8 +24,8 @@ public class Collection {
     private String website;
     private String discord;
     private String twitter;
-    private String categoryName;
     private LocalDate createdAt;
+    private String categoryName;
 
 
     public Collection(String name, String description, int items, String website, String discord, String twitter, String categoryName, LocalDate createdAt) {
