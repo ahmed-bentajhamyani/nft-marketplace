@@ -20,9 +20,8 @@ public class CartServiceApplication {
 	@Bean
 	CommandLineRunner start( CartRepository cartRepo) {
 		return args->{
-			
 			Stream.of(12,123,null).forEach(c->{
-				cartRepo.save(new Cart("dde122",12,(float) 123.5,null));
+				// cartRepo.save(new Cart("dde122",12,(float) 123.5,null));
 			});
 		};
 	}
