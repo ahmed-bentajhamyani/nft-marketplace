@@ -47,14 +47,16 @@ export class NavbarComponent {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e: any) {
     if (window.pageYOffset) {
-      this.navbar.classList.add('sticky', 'top-0', 'bg-white', 'shadow-md');
+      this.navbar.classList.add('sticky', 'top-0', 'bg-white');
       if (this.href == "") {
+        this.navbar.classList.add('shadow-md');
         this.searchbar.classList.remove('bg-white');
         this.searchbar.classList.add('bg-gray-100');
       }
     } else {
       this.navbar.classList.remove('sticky', 'top-0', 'bg-white');
       if (this.href == "") {
+        this.navbar.classList.remove('shadow-md');
         this.searchbar.classList.remove('bg-gray-100');
         this.searchbar.classList.add('bg-white');
       }
