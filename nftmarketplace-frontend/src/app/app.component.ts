@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +7,10 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
   title = 'NFT Store';
-  href: any;
 
-  constructor(private location: Location) { }
+  constructor() { }
 
   ngOnInit() {
-    this.href = this.location.path();
-    console.log(this.location.path());
   }
 }
+
