@@ -14,14 +14,6 @@ export class AppComponent {
 
   ngOnInit() {
     this.href = this.location.path();
-    let body = document.getElementById('body');
-    if (body != null) {
-      if (this.href == "") {
-        body.classList.add('all');
-      } else {
-        body.classList.remove('all');
-      }
-    }
     console.log(this.location.path());
   }
 }

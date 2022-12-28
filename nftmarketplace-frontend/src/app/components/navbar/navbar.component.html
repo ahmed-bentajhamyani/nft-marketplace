@@ -1,4 +1,4 @@
-<nav (scroll)="onWindowScroll($event);" class="flex flex-shrink-0 shadow-md z-50 justify-between items-center py-9 h-20"
+<nav (scroll)="onWindowScroll($event);" class="flex flex-shrink-0 z-50 justify-between items-center py-9 h-20"
     id="navbar">
 
     <!-- Logo -->
@@ -34,17 +34,17 @@
     </ul>
 
     <!-- Explore Dropdown menu -->
-    <div id="exploreDropdown" class="hidden z-10 w-44 bg-white  rounded-lg divide-y divide-gray-100 shadow">
+    <div id="exploreDropdown" class="hidden z-10 w-44 bg-white rounded-lg divide-y divide-gray-100 shadow">
         <ul *ngFor="let category of categories" class="text-sm text-gray-700" aria-labelledby="exploreDropdown">
             <li>
                 <a href="{{'#' + category.name}}"
-                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100">{{category.name}}</a>
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 rounded-lg hover:bg-gray-100">{{category.name}}</a>
             </li>
         </ul>
     </div>
 
     <!-- Account Dropdown menu -->
-    <div id="accountDropdown" class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-2xl">
+    <div id="accountDropdown" class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow">
         <ul class="text-sm text-gray-700" aria-labelledby="accountDropdown">
             <li>
                 <a href="#" data-modal-toggle="crypto-modal"
@@ -56,7 +56,7 @@
                         [icon]="faHeart" class="mr-4" size="lg"></fa-icon> Favorites</a>
             </li>
             <li>
-                <a href="#" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
+                <a routerLink="create" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
                         [icon]="faPencil" class="mr-4" size="lg"></fa-icon> Create</a>
             </li>
             <li>
