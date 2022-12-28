@@ -1,0 +1,51 @@
+<div class="mt-5">
+    <div class="grid grid-cols-2">
+        <img class="rounded-xl" src="assets/logo/photo.avif" alt="" width="500px" />
+
+        <div class="-ml-16">
+            <div class="flex items-center">
+                <p class='font-bold text-xl w-full'>Collection name</p>
+                <div class="flex justify-end">
+                    <!-- Share -->
+                    <a
+                        class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
+                        <fa-icon [icon]="faShareNodes" class="text-gray-900" size="lg"></fa-icon>
+                    </a>
+                    <!-- Ellipsis Menu -->
+                    <a data-dropdown-toggle="profilEllipsisDropdown"
+                        class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
+                        <fa-icon [icon]="faEllipsis" class="text-gray-900" size="lg"></fa-icon>
+                    </a>
+                </div>
+            </div>
+            <p class='font-bold text-4xl mb-2'>Item name</p>
+            <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500">
+                    ahmedep</a></p>
+
+            <!-- Price and Add to cart Card -->
+            <app-price-card></app-price-card>
+
+            <app-item-description-card></app-item-description-card>
+        </div>
+
+
+        <!-- Ellipsis Dropdown menu -->
+        <div id="profilEllipsisDropdown"
+            class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-2xl">
+            <ul class="text-sm text-gray-700" aria-labelledby="profilEllipsisDropdown">
+                <li>
+                    <a href="#"
+                        class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
+                            [icon]="faGlobe" class="mr-4" size="lg"></fa-icon> View website</a>
+                </li>
+                <li>
+                    <a href="#" data-modal-toggle="crypto-modal"
+                        class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
+                            [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <app-more-items-card></app-more-items-card>
+</div>

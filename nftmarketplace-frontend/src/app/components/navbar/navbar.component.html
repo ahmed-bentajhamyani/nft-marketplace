@@ -1,29 +1,72 @@
-<nav (scroll)="onWindowScroll($event);" class="flex flex-shrink-0 justify-between items-center py-9 h-20" id="navbar">
+<nav (scroll)="onWindowScroll($event);" class="flex flex-shrink-0 shadow-md z-50 justify-between items-center py-9 h-20"
+    id="navbar">
 
     <!-- Logo -->
-    <div class="flex justify-between items-center px-5 select-none">
-        <img src="../../../assets/logo/nft-logo.png" alt="nft-logo" />
-    </div>
+    <a href="#navbar" class="flex items-center mx-8 w-full select-none">
+        <img src="assets/logo/nft-logo.png" alt="nft-logo" width="40px" height="18px" />
+        <h1 class="text-xl font-extrabold mx-4">NFT Store</h1>
+    </a>
 
     <!-- Search Bar -->
-    <div class="flex items-center px-16 mx-8 select-none">
-        <input type="search" class="block px-4 py-2 select-none" placeholder="Search for Products..."
-            style="border: 0; border-radius: 20px; background-color: rgb(240, 240, 240);" />
+    <div class="relative w-full items-center">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <fa-icon [icon]="faSearch" class="mx-2 w-5 h-5 text-gray-400"></fa-icon>
+        </div>
+        <input type="text" id="searchbar"
+            class="bg-gray-100 border border-gray-300 text-gray-800 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 px-2.5 py-2.5"
+            placeholder="Search for Products...">
     </div>
 
     <!-- Links -->
-    <ul class="flex flex-row justify-between items-center w-full mr-24">
-        <li class="my-5">home</li>
-        <li class="my-5">explores</li>
-        <li class="my-5">explores</li>
-        <li class="my-5">explores</li>
-        <li class="my-5">
+    <ul class="flex flex-row justify-between items-center w-full mx-8 font-bold select-none">
+        <!-- <li class="mx-3"><a href="#home">Home</a></li> -->
+        <li data-dropdown-toggle="exploreDropdown" class="truncate mx-3 cursor-pointer" type="button">Explores
+        </li>
+        <li class="mx-3">Explores</li>
+        <li class="mx-3">
             <div class='flex items-center justify-center cursor-pointer select-none mb-5 md:mb-0'>
-        <li class="my-5"><fa-icon [icon]="faUser" size="lg"></fa-icon></li>
-        <img src="../../../assets/logo/nft-logo.svg" alt="profil-picture" width="40px" height="10px"
-            class='bg-transparent' />
+        <li data-dropdown-toggle="accountDropdown" class="mx-3"><fa-icon [icon]="faCircleUser" size="lg"></fa-icon></li>
+        <!-- <img src="assets/logo/nft-logo.svg" alt="profil-picture" width="40px" height="10px" class='bg-transparent' /> -->
         </div>
         </li>
-        <li class="my-5"><fa-icon [icon]="faShoppingCart" size="lg"></fa-icon></li>
+        <li data-modal-toggle="cart-modal" class="mx-3 cursor-pointer"><fa-icon [icon]="faShoppingCart"
+                size="lg"></fa-icon></li>
     </ul>
+
+    <!-- Explore Dropdown menu -->
+    <div id="exploreDropdown" class="hidden z-10 w-44 bg-white  rounded-lg divide-y divide-gray-100 shadow">
+        <ul *ngFor="let category of categories" class="text-sm text-gray-700" aria-labelledby="exploreDropdown">
+            <li>
+                <a href="{{'#' + category.name}}"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100">{{category.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Account Dropdown menu -->
+    <div id="accountDropdown" class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-2xl">
+        <ul class="text-sm text-gray-700" aria-labelledby="accountDropdown">
+            <li>
+                <a href="#" data-modal-toggle="crypto-modal"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
+                        [icon]="faUser" class="mr-4" size="lg"></fa-icon> Profile</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
+                        [icon]="faHeart" class="mr-4" size="lg"></fa-icon> Favorites</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
+                        [icon]="faPencil" class="mr-4" size="lg"></fa-icon> Create</a>
+            </li>
+            <li>
+                <a href="#" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
+                        [icon]="faGear" class="mr-4" size="lg"></fa-icon> Settings</a>
+            </li>
+        </ul>
+    </div>
 </nav>
+
+<app-auth-modal></app-auth-modal>
+
+<app-cart-modal></app-cart-modal>

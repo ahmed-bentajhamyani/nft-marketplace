@@ -1,0 +1,82 @@
+<div class='mt-5 px-12' id="home">
+    <div class='text-center mb-4'>
+        <h1 class='font-extrabold text-3xl'>Explore, buy and sell
+            NFTs</h1>
+    </div>
+
+    <ng-container *ngIf="collections != null">
+        <!-- Collections -->
+        <div class="flex items-center justify-center w-full my-3">
+            <div class="w-full relative flex items-center justify-center">
+
+                <!-- Left Button -->
+                <button aria-label="slide backward"
+                    class="absolute z-30 left-0 bg-white w-12 h-12 rounded-full shadow-xl -ml-3 focus:outline-none cursor-pointer"
+                    (click)="goPrev('slider')">
+                    <fa-icon [icon]="faChevronLeft" size="lg"></fa-icon>
+                </button>
+
+                <!-- Slider -->
+                <div class="mx-auto overflow-x-hidden overflow-y-hidden">
+                    <div id="slider" class="flex items-center justify-start transition ease-out duration-700">
+                        <!-- Items -->
+                        <ng-container *ngFor="let collection of collections">
+                            <div class="flex flex-shrink-0 relative w-1/4 mt-2 py-8">
+                                <app-collection-card [collection]="collection"></app-collection-card>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Right Button -->
+                <button aria-label="slide forward"
+                    class="absolute z-30 right-0 bg-white w-12 h-12 rounded-full shadow-xl focus:outline-none"
+                    (click)="goNext('slider')">
+                    <fa-icon [icon]="faChevronRight" size="lg"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- Collection Display by Category -->
+    <ng-container *ngFor="let category of notEmptyCategories">
+        <div class="px-3" id={{category.name}}>
+            <h1 class='font-extrabold text-2xl'>{{category.name}}</h1>
+        </div>
+        <!-- Collections -->
+
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="w-full relative flex items-center justify-center">
+
+                <!-- Left Button -->
+                <button aria-label="slide backward"
+                    class="absolute z-30 left-0 bg-white w-12 h-12 rounded-full shadow-xl -ml-3 focus:outline-none cursor-pointer"
+                    (click)="goPrev(category.name)">
+                    <fa-icon [icon]="faChevronLeft" size="lg"></fa-icon>
+                </button>
+
+                <!-- Slider -->
+                <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+                    <div id={{category.name}}
+                        class="h-full flex items-center justify-start transition ease-out duration-700">
+                        <!-- Items -->
+                        <ng-container *ngFor="let collection of collections">
+                            <ng-container *ngIf="collection.categoryName == category.name">
+                                <div class="flex flex-shrink-0 relative w-1/4 mt-2 py-8">
+                                    <app-collection-card [collection]="collection"></app-collection-card>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+
+                <!-- Right Button -->
+                <button aria-label="slide forward"
+                    class="absolute z-30 right-0 bg-white w-12 h-12 rounded-full shadow-xl focus:outline-none"
+                    (click)="goNext(category.name)">
+                    <fa-icon [icon]="faChevronRight" size="lg"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>

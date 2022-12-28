@@ -1,7 +1,11 @@
-<app-navbar></app-navbar>
+<div id="body">
+    <app-navbar></app-navbar>
 
-<div class="mx-auto">
-    <router-outlet></router-outlet>
+    <div class="p-10 mx-auto">
+        <router-outlet></router-outlet>
+    </div>
+
+    <ng-container *ngIf="href == ''">
+        <app-footer></app-footer>
+    </ng-container>
 </div>
-
-<app-footer></app-footer>

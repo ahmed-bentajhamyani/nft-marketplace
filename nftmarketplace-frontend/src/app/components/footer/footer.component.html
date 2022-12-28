@@ -1,1 +1,40 @@
-<p>footer works!</p>
+<footer class="bg-blue-200 rounded-2xl shadow  py-8">
+    <div class="flex justify-between items-center">
+        <form action="" class="pl-6 pt-6">
+            <div class="mb-6">
+                <p class="text-gray-800">
+                    <strong>Sign up for our newsletter</strong>
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gird-cols-1 gap-4 items-center">
+                <div class="mb-6">
+                    <input type="email" placeholder="Email address..."
+                        class="block pr-24 py-3.5 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </div>
+
+                <div class="mb-6">
+                    <button type="submit"
+                        class="text-white bg-blue-500 hover:bg-blue-800 focus:outline-none focus:ring-blue-300 rounded-lg text-base w-auto px-5 py-3.5 text-center">Subscribe</button>
+                </div>
+            </div>
+        </form>
+        <div class="flex items-center justify-center">
+            <!-- Logo -->
+            <a href="#home" class="flex justify-center items-center mx-8 select-none">
+                <img src="assets/logo/nft-logo.png" alt="nft-logo" width="40px" height="18px" />
+                <h1 class="text-xl font-extrabold mx-4">NFT Store</h1>
+            </a>
+        </div>
+    </div>
+    <hr class="my-6 border-gray-200 lg:my-8" />
+    <span class="block text-sm text-gray-500 text-center">© 2022 <a href="" class="hover:underline">NFT Store™</a>. All
+        Rights Reserved.
+    </span>
+    <ul class="flex flex-wrap justify-center items-center mt-2 text-sm text-gray-500">
+        <ng-container *ngFor="let category of categories">
+            <li>
+                <a href="{{'#' + category.name}}" class="mr-4 hover:underline md:mr-6 ">{{category.name}}</a>
+            </li>
+        </ng-container>
+    </ul>
+</footer>

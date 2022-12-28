@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'nftmarketplace-frontend';
+  title = 'NFT Store';
+  href: any;
+
+  constructor(private location: Location) { }
+
+  ngOnInit() {
+    this.href = this.location.path();
+    let body = document.getElementById('body');
+    if (body != null) {
+      if (this.href == "") {
+        body.classList.add('all');
+      } else {
+        body.classList.remove('all');
+      }
+    }
+    console.log(this.location.path());
+  }
 }
