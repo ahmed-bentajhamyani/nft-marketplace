@@ -16,7 +16,7 @@ public class CollectionController {
 
     @GetMapping
     public List<Collection> getAllCategories() {
-        return collectionService.getAllCategories();
+        return collectionService.getAllCollections();
     }
 
     @GetMapping("/{name}")
@@ -26,16 +26,16 @@ public class CollectionController {
 
     @PostMapping
     public void createCategory(@RequestBody Collection collection) {
-        collectionService.createCategory(collection);
+        collectionService.createCollection(collection);
     }
 
     @PutMapping("/{id}")
     public void updateCategory(@PathVariable String id, @RequestBody Collection collection) {
-        collectionService.updateCategory(id, collection);
+        collectionService.updateCollection(id, collection);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCategory(@PathVariable String id) {
-        collectionService.deleteCategory(id);
+        collectionService.deleteCollection(id);
     }
 }

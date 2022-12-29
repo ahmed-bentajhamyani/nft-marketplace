@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface CollectionRepository extends MongoRepository<Collection, String> {
     @Query("{name:'?0'}")
-    Collection findCategoryByName(String name);
+    Collection findCollectionByName(String name);
 }

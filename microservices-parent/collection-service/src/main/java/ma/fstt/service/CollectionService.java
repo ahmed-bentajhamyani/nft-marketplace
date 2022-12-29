@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,20 +13,20 @@ public class CollectionService {
     @Autowired
     private CollectionRepository collectionRepository;
 
-    public List<Collection> getAllCategories() {
+    public List<Collection> getAllCollections() {
         return collectionRepository.findAll();
     }
 
     public Collection getCollectionByName(String name) {
-        return collectionRepository.findCategoryByName(name);
+        return collectionRepository.findCollectionByName(name);
     }
 
-    public void createCategory(Collection col) {
-        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), col.getCategoryName(), LocalDate.now());
+    public void createCollection(Collection col) {
+        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), LocalDate.now(), col.getCategoryName(), col.getUsername());
         collectionRepository.insert(collection);
     }
 
-    public void updateCategory(String id, Collection col) {
+    public void updateCollection(String id, Collection col) {
         collectionRepository.findById(id)
                 .map(collection -> {
                     collection.setName(col.getName());
@@ -39,7 +38,7 @@ public class CollectionService {
                 });
     }
 
-    public void deleteCategory(String id) {
+    public void deleteCollection(String id) {
         collectionRepository.deleteById(id);
     }
 }

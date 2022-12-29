@@ -25,14 +25,8 @@ public class CollectionServiceApplication {
     @Bean
     CommandLineRunner runner(CollectionService collectionService) {
         return args -> {
-            LocalDate date = LocalDate.now();
-            /*
-			Collection collection = new Collection("Dracula", "Dracula dark", 12, "www.com", "DWWW", "TWWW", "Art", date);
-            collectionService.createCategory(collection);
-            collectionService.createCategory(collection);
-            collectionService.createCategory(collection);
-            collectionService.createCategory(collection);
-			*/
+			Collection collection = new Collection("Dracula", "Dracula dark", 12, "www.com", "DWWW", "TWWW", LocalDate.now(), "Art", "ahmedep");
+            collectionService.createCollection(collection);
         };
     }
 }

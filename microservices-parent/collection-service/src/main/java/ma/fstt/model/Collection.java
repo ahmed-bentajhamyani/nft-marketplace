@@ -26,16 +26,18 @@ public class Collection {
     private String twitter;
     private LocalDate createdAt;
     private String categoryName;
+    private String username;
 
 
-    public Collection(String name, String description, int items, String website, String discord, String twitter, String categoryName, LocalDate createdAt) {
+    public Collection(String name, String description, int items, String website, String discord, String twitter, LocalDate createdAt, String categoryName, String username) {
         this.name = name;
         this.description = description;
         this.items = items;
         this.website = website;
         this.discord = discord;
         this.twitter = twitter;
-        this.categoryName = categoryName;
         this.createdAt = createdAt;
+        this.categoryName = categoryName;
+        this.username = username;
     }
 }
