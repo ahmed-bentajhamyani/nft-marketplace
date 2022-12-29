@@ -18,8 +18,8 @@ public class NFTService {
         return nftRepository.findAll();
     }
 
-    public NFT getNFTByName(String name) {
-        return (NFT) nftRepository.findNFTByName(name);
+    public NFT[] getNFTByCollectionName(String collectionName) {
+        return nftRepository.findNFTByCollectionName(collectionName);
     }
 
     public Optional<NFT> getNftById(String id) {

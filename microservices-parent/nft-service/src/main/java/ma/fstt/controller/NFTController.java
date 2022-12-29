@@ -21,13 +21,13 @@ public class NFTController {
     }
 
     @GetMapping("/{id}")
-    public Optional<NFT> getOneNFT(@PathVariable("id") String id) {
+    public Optional<NFT> getOneNFT(@PathVariable String id) {
         return nftService.getNftById(id);
     }
 
-    @GetMapping("/{name}")
-    public NFT findByName(@PathVariable String name) {
-        return nftService.getNFTByName(name);
+    @GetMapping("/{collectionName}")
+    public NFT[] findByCollectionName(@PathVariable String collectionName) {
+        return nftService.getNFTByCollectionName(collectionName);
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class NFTController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteNFT(@PathVariable("id") String id) {
+    public void deleteNFT(@PathVariable String id) {
         nftService.deleteNFT(id);
     }
 }

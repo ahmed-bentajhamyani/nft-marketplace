@@ -18,7 +18,7 @@ public class UserService {
     UserRepository userRepository;
 
     public void save(User user) {
-        User use = new User(user.getWalletId(), user.getUsername(), user.getEmail(), user.getProfilPicture(), LocalDate.now());
+        User use = new User(user.getUsername(), user.getEmail(), user.getProfilPicture(), LocalDate.now(), user.getWalletId());
         userRepository.insert(use);
     }
 
