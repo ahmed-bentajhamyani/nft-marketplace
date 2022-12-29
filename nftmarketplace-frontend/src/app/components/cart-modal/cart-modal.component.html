@@ -2,23 +2,23 @@
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
     <div class="relative w-full h-full max-w-md md:h-auto">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-2xl shadow dark:bg-gray-700">
+        <div class="relative bg-white rounded-2xl shadow">
             <button type="button"
-                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-800 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                 data-modal-toggle="cart-modal">
                 <fa-icon [icon]="faXmark" class="w-5 h-5" size="lg"></fa-icon>
                 <span class="sr-only">Close modal</span>
             </button>
             <!-- Modal header -->
-            <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="text-base font-bold text-gray-800 lg:text-xl dark:text-white">
+            <div class="px-6 py-4 border-b rounded-t">
+                <h3 class="text-base font-bold text-gray-800 lg:text-xl">
                     Your cart
                 </h3>
             </div>
             <!-- Modal body -->
             <div class="p-6 border-b max-h-80 overflow-y-auto">
                 <div class="flex justify-between items-center">
-                    <p class="font-bold text-gray-800 dark:text-gray-400">1 Item</p>
+                    <p class="font-bold text-gray-800">1 Item</p>
                     <button type="submit"
                         class="text-white text-xs rounded-lg px-4 py-2.5 text-center bg-rose-500 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300">Clear
                         all</button>
@@ -28,9 +28,9 @@
                         <a href="" class="flex items-center w-full">
                             <img class="p-3" src="assets/logo/photo.avif" alt="" width="100px" height="120px" />
                             <div class="flex flex-col items-start mx-4">
-                                <p class="font-bold text-gray-800 dark:text-gray-400">Item name</p>
-                                <p class="text-gray-800 dark:text-gray-400">4.5 ETH</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Creator fee : 5%</p>
+                                <p class="font-bold text-gray-800">Item name</p>
+                                <p class="text-gray-800">4.5 ETH</p>
+                                <p class="text-sm text-gray-500">Creator fee : 5%</p>
                             </div>
                         </a>
                         <a href="">
@@ -42,8 +42,8 @@
             </div>
             <div class="p-6 font-bold">
                 <div class="flex justify-between items-center mb-4">
-                    <p class="text-gray-800 dark:text-gray-400">Total price</p>
-                    <p class="text-gray-800 dark:text-gray-400">4.5 ETH</p>
+                    <p class="text-gray-800">Total price</p>
+                    <p class="text-gray-800">4.5 ETH</p>
                 </div>
                 <button type="submit"
                     class="text-white bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-base w-full px-5 py-3.5 text-center">Checkout</button>
