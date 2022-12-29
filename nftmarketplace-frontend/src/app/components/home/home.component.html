@@ -10,10 +10,10 @@
 
         <div class="rounded-xl border w-full my-3">
             <ul *ngFor="let collection of collections.slice(0, 5);" class="p-3">
-                <li class="p-2 rounded-xl hover:bg-gray-100">
+                <li class="rounded-xl hover:bg-gray-100">
                     <a [routerLink]="['collection', collection.name]" class="flex justify-between items w-full">
                         <div class="flex items-center">
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="70px" />
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="60px" />
                             <p class="font-bold text-gray-800 text-lg truncate">{{collection.name}}</p>
                         </div>
                         <p class="text-gray-500 text-sm self-center"><span
