@@ -1,47 +1,62 @@
 <div class='px-12' id="home">
-    <div class='text-center mb-4'>
+    <!-- <div class='text-center mb-4'>
         <h1 class='font-extrabold text-gray-800 text-3xl'>Explore, buy and sell
             NFTs</h1>
-    </div>
+    </div> -->
 
     <ng-container *ngIf="collections != null">
-        <!-- Collections -->
-        <div class="flex items-center justify-center w-full my-3">
-            <div class="w-full relative flex items-center justify-center">
+        <!-- New Collections -->
+        <h1 class='font-extrabold text-gray-800 text-2xl mb-4'>New Collections</h1>
 
-                <!-- Left Button -->
-                <button aria-label="slide backward"
-                    class="absolute z-30 left-0 bg-white w-12 h-12 rounded-full shadow-xl -ml-3 focus:outline-none cursor-pointer"
-                    (click)="goPrev('slider')">
-                    <fa-icon [icon]="faChevronLeft" size="lg"></fa-icon>
-                </button>
+        <div class="rounded-xl border w-full my-3">
+            <ul class="p-3">
+                <li class="p-2 rounded-xl hover:bg-gray-100">
+                    <a href="" class="flex justify-between items w-full">
+                        <div class="flex items-center">
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="70px" />
+                            <p class="font-bold text-gray-800 text-lg truncate">Item name</p>
+                        </div>
+                        <p class="text-gray-500 text-sm self-center"><span
+                                class="font-bold text-gray-800 text-xl">4.5</span> ETH</p>
+                        <p class="text-sm text-gray-500 self-center">Creator fee : 5%</p>
+                        <div class="flex items-start">
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                        </div>
+                    </a>
+                </li>
 
-                <!-- Slider -->
-                <div class="mx-auto overflow-x-hidden overflow-y-hidden">
-                    <div id="slider" class="flex items-center justify-start transition ease-out duration-700">
-                        <!-- Items -->
-                        <ng-container *ngFor="let collection of collections">
-                            <div class="flex flex-shrink-0 relative w-1/4 mt-2 py-8">
-                                <app-collection-card [collection]="collection"></app-collection-card>
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
+                <li class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-100">
+                    <a href="" class="grid grid-cols-3">
+                        <div class="flex">
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <p class="font-bold text-gray-800">Item name</p>
+                        </div>
+                        <p class="text-gray-800">4.5 ETH</p>
+                        <p class="text-sm text-gray-500">Creator fee : 5%</p>
+                    </a>
+                </li>
 
-                <!-- Right Button -->
-                <button aria-label="slide forward"
-                    class="absolute z-30 right-0 bg-white w-12 h-12 rounded-full shadow-xl focus:outline-none"
-                    (click)="goNext('slider')">
-                    <fa-icon [icon]="faChevronRight" size="lg"></fa-icon>
-                </button>
-            </div>
+                <li class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-100">
+                    <a href="" class="grid grid-cols-3">
+                        <div class="flex">
+                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <p class="font-bold text-gray-800">Item name</p>
+                        </div>
+                        <p class="text-gray-800">4.5 ETH</p>
+                        <p class="text-sm text-gray-500">Creator fee : 5%</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </ng-container>
 
     <!-- Collection Display by Category -->
     <ng-container *ngFor="let category of notEmptyCategories">
         <div class="px-3" id={{category.name}}>
-            <h1 class='font-extrabold text-2xl'>{{category.name}}</h1>
+            <h1 class='font-extrabold text-gray-800 text-2xl'>{{category.name}}</h1>
         </div>
         <!-- Collections -->
 
