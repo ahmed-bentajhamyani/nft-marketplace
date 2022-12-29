@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NFTService {
@@ -22,8 +21,8 @@ public class NFTService {
         return nftRepository.findNFTByCollectionName(collectionName);
     }
 
-    public Optional<NFT> getNftById(String id) {
-        return nftRepository.findById(id);
+    public NFT getNftByName(String name) {
+        return nftRepository.findNftByName(name);
     }
 
     public void createNFT(NFT nft) {
@@ -34,7 +33,7 @@ public class NFTService {
         return nftRepository.findById(id).map(x -> {
             x.setImage(nft.getImage());
             x.setName(nft.getName());
-            x.setPrise(nft.getPrise());
+            x.setPrice(nft.getPrice());
             return nftRepository.save(x);
         }).orElseGet(() -> {
             nft.setId(id);

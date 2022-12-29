@@ -17,13 +17,11 @@ public class CategoryServiceApplication {
         SpringApplication.run(CategoryServiceApplication.class, args);
     }
 
-    /*
     @Bean
     CommandLineRunner runner(CategoryService categoryService) {
         return args -> {
             Category category = new Category("Music");
-            categoryService.createCategory(category);
+            //categoryService.createCategory(category);
         };
     }
-     */
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/nfts")
@@ -20,12 +19,12 @@ public class NFTController {
         return nftService.getAllNFTs();
     }
 
-    @GetMapping("/{id}")
-    public Optional<NFT> getOneNFT(@PathVariable String id) {
-        return nftService.getNftById(id);
+    @GetMapping("/{name}")
+    public NFT getNftByName(@PathVariable String name) {
+        return nftService.getNftByName(name);
     }
 
-    @GetMapping("/{collectionName}")
+    @GetMapping("/collection/{collectionName}")
     public NFT[] findByCollectionName(@PathVariable String collectionName) {
         return nftService.getNFTByCollectionName(collectionName);
     }

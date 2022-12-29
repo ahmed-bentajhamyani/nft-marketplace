@@ -26,7 +26,7 @@ public class CollectionServiceApplication {
     CommandLineRunner runner(CollectionService collectionService) {
         return args -> {
 			Collection collection = new Collection("Dracula", "Dracula dark", 12, "www.com", "DWWW", "TWWW", LocalDate.now(), "Art", "ahmedep");
-            collectionService.createCollection(collection);
+            //collectionService.createCollection(collection);
         };
     }
 }
