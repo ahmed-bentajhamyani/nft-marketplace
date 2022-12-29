@@ -7,23 +7,31 @@ import { NFT } from '../models/nft';
 })
 export class NftService {
 
-  apiUrl = "http://localhost:8000/api/nfts";
+  apiUrl = "http://localhost:8083/api/nfts";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getNFTs(){
+  getNFTs() {
     return this.httpClient.get<NFT[]>(`${this.apiUrl}`);
   }
-  getOneNFT( id:any ){
-    return this.httpClient.get<NFT>(`${this.apiUrl}/${id}`);
+
+  getNftByName(name: any) {
+    return this.httpClient.get<NFT>(`${this.apiUrl}/${name}`);
   }
-  deleteNFT( id:any ){
+
+  getNftsByCollectionName(collectionName: any) {
+    return this.httpClient.get<NFT[]>(`${this.apiUrl}/collection/${collectionName}`);
+  }
+
+  deleteNFT(id: any) {
     return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
-  persistNFT( data:any ){
+
+  persistNFT(data: any) {
     return this.httpClient.post(`${this.apiUrl}`, data);
   }
-  updateNFT( NFT:any ){
+
+  updateNFT(NFT: any) {
     return this.httpClient.put<NFT>(`${this.apiUrl}/${NFT.id}`, NFT);
   }
 }

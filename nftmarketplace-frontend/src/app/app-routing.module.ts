@@ -8,8 +8,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 export const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "collection", component: CollectionComponent },
-  { path: "item", component: ItemComponent },
+  { path: "collection/:name", component: CollectionComponent },
+  { path: "item/:name", component: ItemComponent },
   { path: "account", component: ProfileComponent },
   { path: "create", component: CollectionFormComponent }
 ];

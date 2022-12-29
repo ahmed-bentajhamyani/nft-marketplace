@@ -9,21 +9,25 @@ export class CollectionService {
 
   apiUrl = "http://localhost:8089/api/collections";
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  getCollections(){
+  getCollections() {
     return this.httpClient.get<Collection[]>(`${this.apiUrl}`);
   }
-  getOneCollection( id:any ){
-    return this.httpClient.get<Collection>(`${this.apiUrl}/${id}`);
+
+  getCollectionByName(name: any) {
+    return this.httpClient.get<Collection>(`${this.apiUrl}/${name}`);
   }
-  deleteCollection( id:any ){
+
+  deleteCollection(id: any) {
     return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
-  persistCollection( data:any ){
+
+  persistCollection(data: any) {
     return this.httpClient.post(`${this.apiUrl}`, data);
   }
-  updateCollection( Collection:any ){
+
+  updateCollection(Collection: any) {
     return this.httpClient.put<Collection>(`${this.apiUrl}/${Collection.id}`, Collection);
   }
 }

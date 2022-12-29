@@ -9,44 +9,21 @@
         <h1 class='font-extrabold text-gray-800 text-2xl mb-4'>New Collections</h1>
 
         <div class="rounded-xl border w-full my-3">
-            <ul class="p-3">
+            <ul *ngFor="let collection of collections.slice(0, 5);" class="p-3">
                 <li class="p-2 rounded-xl hover:bg-gray-100">
-                    <a href="" class="flex justify-between items w-full">
+                    <a [routerLink]="['collection', collection.name]" class="flex justify-between items w-full">
                         <div class="flex items-center">
                             <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="70px" />
-                            <p class="font-bold text-gray-800 text-lg truncate">Item name</p>
+                            <p class="font-bold text-gray-800 text-lg truncate">{{collection.name}}</p>
                         </div>
                         <p class="text-gray-500 text-sm self-center"><span
                                 class="font-bold text-gray-800 text-xl">4.5</span> ETH</p>
                         <p class="text-sm text-gray-500 self-center">Creator fee : 5%</p>
-                        <div class="flex items-start">
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                        </div>
-                    </a>
-                </li>
-
-                <li class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-100">
-                    <a href="" class="grid grid-cols-3">
-                        <div class="flex">
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                            <p class="font-bold text-gray-800">Item name</p>
-                        </div>
-                        <p class="text-gray-800">4.5 ETH</p>
-                        <p class="text-sm text-gray-500">Creator fee : 5%</p>
-                    </a>
-                </li>
-
-                <li class="flex justify-between items-center p-2 rounded-xl hover:bg-gray-100">
-                    <a href="" class="grid grid-cols-3">
-                        <div class="flex">
-                            <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
-                            <p class="font-bold text-gray-800">Item name</p>
-                        </div>
-                        <p class="text-gray-800">4.5 ETH</p>
-                        <p class="text-sm text-gray-500">Creator fee : 5%</p>
+                        <ng-container *ngIf="nftsInCollection[collection.name] != null">
+                            <div *ngFor="let nft of nftsInCollection[collection.name]" class="flex items-start">
+                                <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            </div>
+                        </ng-container>
                     </a>
                 </li>
             </ul>
@@ -54,45 +31,51 @@
     </ng-container>
 
     <!-- Collection Display by Category -->
-    <ng-container *ngFor="let category of notEmptyCategories">
-        <div class="px-3" id={{category.name}}>
-            <h1 class='font-extrabold text-gray-800 text-2xl'>{{category.name}}</h1>
-        </div>
-        <!-- Collections -->
-
-        <div class="flex items-center justify-center w-full h-full">
-            <div class="w-full relative flex items-center justify-center">
-
-                <!-- Left Button -->
-                <button aria-label="slide backward"
-                    class="absolute z-30 left-0 bg-white w-12 h-12 rounded-full shadow-xl -ml-3 focus:outline-none cursor-pointer"
-                    (click)="goPrev(category.name)">
-                    <fa-icon [icon]="faChevronLeft" size="lg"></fa-icon>
-                </button>
-
-                <!-- Slider -->
-                <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
-                    <div id={{category.name}}
-                        class="h-full flex items-center justify-start transition ease-out duration-700">
-                        <!-- Items -->
-                        <ng-container *ngFor="let collection of collections">
-                            <ng-container *ngIf="collection.categoryName == category.name">
-                                <div class="flex flex-shrink-0 relative w-1/4 mt-2 py-8">
-                                    <app-collection-card [collection]="collection"></app-collection-card>
-                                </div>
-                            </ng-container>
-                        </ng-container>
-                    </div>
-                </div>
-
-                <!-- Right Button -->
-                <button aria-label="slide forward"
-                    class="absolute z-30 right-0 bg-white w-12 h-12 rounded-full shadow-xl focus:outline-none"
-                    (click)="goNext(category.name)">
-                    <fa-icon [icon]="faChevronRight" size="lg"></fa-icon>
-                </button>
+    <ng-container *ngIf="notEmptyCategories != null">
+        <ng-container *ngFor="let category of notEmptyCategories">
+            <div class="mt-5">
+                <h1 class='font-extrabold text-gray-800 text-2xl'>{{category.name}}</h1>
             </div>
-        </div>
+            <!-- Collections -->
+
+            <div class="flex items-center justify-center w-full h-full">
+                <div class="w-full relative flex items-center justify-center">
+
+                    <!-- Left Button -->
+                    <ng-container *ngIf="collections.length > 4">
+                        <button aria-label="slide backward"
+                            class="absolute z-30 left-0 bg-white w-12 h-12 rounded-full shadow-xl -ml-3 focus:outline-none cursor-pointer"
+                            (click)="goPrev(category.name)">
+                            <fa-icon [icon]="faChevronLeft" size="lg"></fa-icon>
+                        </button>
+                    </ng-container>
+
+                    <!-- Slider -->
+                    <div class="w-full h-full mx-auto overflow-x-hidden overflow-y-hidden">
+                        <div id={{category.name}}
+                            class="h-full flex items-center justify-start transition ease-out duration-700">
+                            <!-- Items -->
+                            <ng-container *ngFor="let collection of collections">
+                                <ng-container *ngIf="collection.categoryName == category.name">
+                                    <div class="flex flex-shrink-0 relative w-1/4 py-8">
+                                        <app-collection-card [collection]="collection"></app-collection-card>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <!-- Right Button -->
+                    <ng-container *ngIf="collections.length > 4">
+                        <button aria-label="slide forward"
+                            class="absolute z-30 right-0 bg-white w-12 h-12 rounded-full shadow-xl -mr-3 focus:outline-none"
+                            (click)="goNext(category.name)">
+                            <fa-icon [icon]="faChevronRight" size="lg"></fa-icon>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
     </ng-container>
 </div>
 

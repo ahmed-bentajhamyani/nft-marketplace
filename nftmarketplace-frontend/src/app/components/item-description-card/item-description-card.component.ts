@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
+import { Collection } from 'src/app/models/collection';
 
 @Component({
   selector: 'app-item-description-card',
@@ -8,4 +9,8 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 })
 export class ItemDescriptionCardComponent {
   faBarsStaggered = faBarsStaggered;
+
+  @Input()
+  collection!: Collection;
+  
 }

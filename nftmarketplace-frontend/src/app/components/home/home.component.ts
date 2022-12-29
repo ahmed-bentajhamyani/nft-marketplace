@@ -2,8 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/models/category';
+import { NFT } from 'src/app/models/nft';
 import { CategoryService } from 'src/app/services/category.service';
 import { CollectionService } from 'src/app/services/collection.service';
+import { NftService } from 'src/app/services/nft.service';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +14,10 @@ import { CollectionService } from 'src/app/services/collection.service';
 })
 export class HomeComponent {
   collections: any;
-  categories: any;
-  notEmptyCategories: Array<Category> = [];;
+  categories: any = [];
+  nfts: any;
+  nftsInCollection: { [key: string]: any[]; } = { "": [] };
+  notEmptyCategories: Array<Category> = [];
 
   // Slider
   slider: any;
@@ -21,7 +25,7 @@ export class HomeComponent {
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
-  constructor(private categoryService: CategoryService, private collectionService: CollectionService, private httpClient: HttpClient) { }
+  constructor(private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService, private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.getCollections();
@@ -49,12 +53,24 @@ export class HomeComponent {
       this.collections = reponse;
       this.getCategories();
       for (let collection of this.collections) {
-        collection.created_at = new Date(collection.created_at).toISOString().slice(0, 16).replace('T', ' ');
+        this.getNftsByCollectionName(collection.name);
       }
     })
   }
 
-  // Slide
+  getNfs() {
+    this.nftService.getNFTs().subscribe(reponse => {
+      this.nfts = reponse;
+    })
+  }
+
+  getNftsByCollectionName(collectionName: any) {
+    this.nftService.getNftsByCollectionName(collectionName).subscribe(reponse => {
+      this.nftsInCollection[collectionName] = reponse;
+    })
+  }
+
+  // Slider
   goNext(slider: string) {
     this.slider = document.getElementById(slider);
     this.defaultTransform = this.defaultTransform - 398;

@@ -4,7 +4,7 @@
 
         <div class="-ml-16">
             <div class="flex items-center">
-                <p class='font-bold text-xl w-full'>Collection name</p>
+                <p class='font-bold text-xl w-full'>{{nft.collectionName}}</p>
                 <div class="flex justify-end">
                     <!-- Share -->
                     <a
@@ -18,14 +18,13 @@
                     </a>
                 </div>
             </div>
-            <p class='font-bold text-4xl mb-2'>Item name</p>
-            <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500">
-                    ahmedep</a></p>
+            <p class='font-bold text-4xl mb-2'>{{nft.name}}</p>
+            <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500"> {{collection.username}}</a></p>
 
             <!-- Price and Add to cart Card -->
-            <app-price-card></app-price-card>
+            <app-price-card [nft]="nft"></app-price-card>
 
-            <app-item-description-card></app-item-description-card>
+            <app-item-description-card [collection]="collection"></app-item-description-card>
         </div>
 
 
