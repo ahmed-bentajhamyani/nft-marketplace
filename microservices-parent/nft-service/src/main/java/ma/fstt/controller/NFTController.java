@@ -30,11 +30,11 @@ public class NFTController {
     }
 
     @PostMapping
-    public void saveNFT(NFT nft) {
+    public void saveNFT(@RequestBody NFT nft) {
         nftService.createNFT(nft);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public void updateNFT(@RequestBody NFT nft, @PathVariable String id) {
         nftService.updateNFT(id, nft);
     }

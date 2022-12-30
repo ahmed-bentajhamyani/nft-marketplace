@@ -5,6 +5,7 @@ import ma.fstt.repository.NFTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -25,8 +26,9 @@ public class NFTService {
         return nftRepository.findNftByName(name);
     }
 
-    public void createNFT(NFT nft) {
-        nftRepository.save(nft);
+    public void createNFT(NFT n) {
+        NFT nft = new NFT(n.getName(), n.getImage(), n.getPrice(), n.getCollectionName());
+        nftRepository.insert(nft);
     }
 
     public NFT updateNFT(String id, NFT nft) {
@@ -34,6 +36,7 @@ public class NFTService {
             x.setImage(nft.getImage());
             x.setName(nft.getName());
             x.setPrice(nft.getPrice());
+            x.setCollectionName(nft.getCollectionName());
             return nftRepository.save(x);
         }).orElseGet(() -> {
             nft.setId(id);

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "ma.fstt.repository")
-@EntityScan("ma.fstt.entities")
 @EnableFeignClients
 public class CollectionServiceApplication {
 

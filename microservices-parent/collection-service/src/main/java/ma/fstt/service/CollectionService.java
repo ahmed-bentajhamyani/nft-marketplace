@@ -30,6 +30,12 @@ public class CollectionService {
         collectionRepository.findById(id)
                 .map(collection -> {
                     collection.setName(col.getName());
+                    collection.setDescription(col.getDescription());
+                    collection.setItems(col.getItems());
+                    collection.setWebsite(col.getWebsite());
+                    collection.setDiscord(col.getDiscord());
+                    collection.setTwitter(col.getTwitter());
+                    collection.setCategoryName(col.getCategoryName());
                     return collectionRepository.save(collection);
                 })
                 .orElseGet(() -> {
