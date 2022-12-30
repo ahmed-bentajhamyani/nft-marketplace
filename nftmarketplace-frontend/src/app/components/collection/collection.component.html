@@ -42,8 +42,11 @@
                     class="hidden z-5000 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-lg">
                     <ul class="text-sm text-gray-700" aria-labelledby="collectionEllipsisDropdown">
                         <li>
-                            <a href="#" data-modal-toggle="crypto-modal"
-                                class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-lg"><fa-icon
+                            <a [href]="['edit/collection/'+ collection.name]"
+                                class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
+                                    [icon]="faPenToSquare" class="mr-4" size="lg"></fa-icon> Edit</a>
+                            <a href="#"
+                                class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
                                     [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
                         </li>
                     </ul>
@@ -56,7 +59,7 @@
         <p class='text-base text-gray-500 mb-1'>Items <span class="font-bold text-gray-900">{{collection.items}}</span>
             · Created <span class="font-bold text-gray-900">{{collection.createdAt}}</span> · Category <span
                 class="font-bold text-gray-900">{{collection.categoryName}}</span></p>
-        <p class='text-base text-gray-700'>{{collection.description}}</p>
+        <p class='text-base text-gray-700 w-2/3'>{{collection.description}}</p>
     </div>
 
     <div class="mb-9">
@@ -64,7 +67,7 @@
             <p class='font-bold text-2xl mb-2'>Items</p>
             <hr />
         </div>
-        <div class="grid grid-cols-5">
+        <div *ngIf="nfts != null" class="grid grid-cols-5">
             <!-- Items -->
             <ng-container *ngFor="let nft of nfts">
                 <app-item-card [nft]="nft"></app-item-card>

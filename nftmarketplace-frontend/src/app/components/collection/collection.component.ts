@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faGlobe, faEllipsis, faShareNodes, faFlag } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faEllipsis, faShareNodes, faFlag, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faDiscord, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { NftService } from 'src/app/services/nft.service';
 import { ActivatedRoute } from '@angular/router';
@@ -21,6 +21,7 @@ export class CollectionComponent {
   faEllipsis = faEllipsis;
   faShareNodes = faShareNodes;
   faFlag = faFlag;
+  faPenToSquare = faPenToSquare;
 
   constructor(private collectionService:CollectionService, private nftService: NftService, private route: ActivatedRoute) { }
 

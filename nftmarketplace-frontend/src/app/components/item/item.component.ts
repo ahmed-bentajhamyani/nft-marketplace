@@ -12,6 +12,7 @@ import { NftService } from 'src/app/services/nft.service';
 })
 export class ItemComponent {
   nft: any;
+  nfts: any;
   collection: any;
 
   // Icons
@@ -32,12 +33,25 @@ export class ItemComponent {
   }
 
   getNftByName(name: any) {
-    this.nftService.getNftByName(name).subscribe(nft => {
-      this.nft = nft;
+    this.nftService.getNftByName(name).subscribe(response => {
+      this.nft = response;
       this.collectionService.getCollectionByName(this.nft.collectionName).subscribe(collection => {
         this.collection = collection;
+        this.getNftsByName(this.nft.collectionName);
       })
     })
+  }
+
+  getNftsByName(collectionName: any) {
+    this.nftService.getNftsByCollectionName(collectionName).subscribe(response => {
+      this.nfts = response;
+      this.nfts = this.nfts.filter((nft: any) => nft.id !== this.nft.id);
+    })
+  }
+
+  // Redirect to an external URL
+  goTo(url: any) {
+    window.location.href = url;
   }
 
 }

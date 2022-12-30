@@ -5,12 +5,8 @@
         </p>
     </div>
     <div class="flex justify-between items-center bg-slate-50 p-4 overflow-y-auto">
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
-        <app-item-card></app-item-card>
+        <ng-container *ngFor="let nft of nfts">
+            <app-item-card [nft]="nft"></app-item-card>
+        </ng-container>
     </div>
 </div>

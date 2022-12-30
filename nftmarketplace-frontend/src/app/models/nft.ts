@@ -3,4 +3,5 @@ export interface NFT {
     name: string;
     image: string;
     price: number;
+    collectionName: string;
 }

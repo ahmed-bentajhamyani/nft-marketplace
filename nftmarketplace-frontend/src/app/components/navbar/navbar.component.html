@@ -20,10 +20,10 @@
     <!-- Links -->
     <ul class="flex flex-row justify-between items-center w-full mx-8 font-bold select-none">
         <!-- <li class="mx-3"><a href="#home">Home</a></li> -->
-        <li data-dropdown-toggle="exploreDropdown" class="truncate mx-3 cursor-pointer" type="button">Explores
+        <li data-dropdown-toggle="exploreDropdown" class="mx-3 cursor-pointer" type="button">Explores
         </li>
-        <li class="mx-3">Explores</li>
-        <li class="mx-3">
+        <li data-dropdown-toggle="createDropdown" class="mx-3 cursor-pointer">Create</li>
+        <li class="mx-3 cursor-pointer">
             <div class='flex items-center justify-center cursor-pointer select-none mb-5 md:mb-0'>
         <li data-dropdown-toggle="accountDropdown" class="mx-3"><fa-icon [icon]="faCircleUser" size="lg"></fa-icon></li>
         <!-- <img src="assets/logo/nft-logo.svg" alt="profil-picture" width="40px" height="10px" class='bg-transparent' /> -->
@@ -34,33 +34,49 @@
     </ul>
 
     <!-- Explore Dropdown menu -->
-    <div id="exploreDropdown" class="hidden z-10 w-44 bg-white rounded-lg divide-y divide-gray-100 shadow">
+    <div id="exploreDropdown" class="hidden z-10 w-44 bg-white border rounded-lg divide-y divide-gray-100 shadow">
         <ul *ngFor="let category of categories" class="text-sm text-gray-700" aria-labelledby="exploreDropdown">
             <li>
                 <a href="{{'#' + category.name}}"
-                    class="flex items-center text-sm font-semibold py-3.5 px-4 rounded-lg hover:bg-gray-100">{{category.name}}</a>
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 border-b rounded-lg hover:bg-gray-100">{{category.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Create Dropdown menu -->
+    <div id="createDropdown" class="hidden z-10 w-44 bg-white border rounded-lg divide-y divide-gray-100 shadow">
+        <ul class="text-sm text-gray-700" aria-labelledby="createDropdown">
+            <li>
+                <a href="create/collection"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 border-b rounded-t-lg hover:bg-gray-100">Collection</a>
+            </li>
+            <li>
+                <a href="create/item"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 rounded-b-lg hover:bg-gray-100">NFT</a>
             </li>
         </ul>
     </div>
 
     <!-- Account Dropdown menu -->
-    <div id="accountDropdown" class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow">
+    <div id="accountDropdown" class="hidden z-10 w-60 bg-white border rounded-lg divide-y divide-gray-100 shadow">
         <ul class="text-sm text-gray-700" aria-labelledby="accountDropdown">
             <li>
                 <a routerLink="account" data-modal-toggle="crypto-modal"
-                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 border-b hover:bg-gray-100 rounded-t-lg"><fa-icon
                         [icon]="faUser" class="mr-4" size="lg"></fa-icon> Profile</a>
             </li>
             <li>
-                <a href="" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
+                <a href="" class="flex items-center text-sm font-semibold py-3.5 px-4 border-b hover:bg-gray-100"><fa-icon
                         [icon]="faHeart" class="mr-4" size="lg"></fa-icon> Favorites</a>
             </li>
             <li>
-                <a routerLink="create" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100"><fa-icon
+                <a routerLink="create/collection"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 border-b hover:bg-gray-100"><fa-icon
                         [icon]="faPencil" class="mr-4" size="lg"></fa-icon> Create</a>
             </li>
             <li>
-                <a href="" class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
+                <a href=""
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
                         [icon]="faGear" class="mr-4" size="lg"></fa-icon> Settings</a>
             </li>
         </ul>

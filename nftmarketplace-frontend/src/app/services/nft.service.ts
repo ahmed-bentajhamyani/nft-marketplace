@@ -11,7 +11,7 @@ export class NftService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getNFTs() {
+  getNfts() {
     return this.httpClient.get<NFT[]>(`${this.apiUrl}`);
   }
 
@@ -23,15 +23,15 @@ export class NftService {
     return this.httpClient.get<NFT[]>(`${this.apiUrl}/collection/${collectionName}`);
   }
 
-  deleteNFT(id: any) {
+  deleteNft(id: any) {
     return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 
-  persistNFT(data: any) {
+  persistNft(data: any) {
     return this.httpClient.post(`${this.apiUrl}`, data);
   }
 
-  updateNFT(NFT: any) {
+  updateNft(NFT: any) {
     return this.httpClient.put<NFT>(`${this.apiUrl}/${NFT.id}`, NFT);
   }
 }

@@ -1,50 +1,52 @@
-<div class="mt-5">
-    <div class="grid grid-cols-2">
-        <img class="rounded-xl" src="assets/logo/photo.avif" alt="" width="500px" />
+<div class="flex justify-end items-end border-b mb-5">
+    <a [href]="['edit/item/'+ nft.name]"
+        class="font-bold text-lg mb-3 px-16 py-4 text-center rounded-lg text-blue-500 bg-white border-2 hover:shadow focus:outline-none focus:ring-blue-300">Edit</a>
+</div>
+<div class="grid grid-cols-2">
+    <img class="rounded-xl" src="assets/logo/photo.avif" alt="" width="500px" />
 
-        <div class="-ml-16">
-            <div class="flex items-center">
-                <p class='font-bold text-xl w-full'>{{nft.collectionName}}</p>
-                <div class="flex justify-end">
-                    <!-- Share -->
-                    <a
-                        class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
-                        <fa-icon [icon]="faShareNodes" class="text-gray-900" size="lg"></fa-icon>
-                    </a>
-                    <!-- Ellipsis Menu -->
-                    <a data-dropdown-toggle="profilEllipsisDropdown"
-                        class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
-                        <fa-icon [icon]="faEllipsis" class="text-gray-900" size="lg"></fa-icon>
-                    </a>
-                </div>
+    <div class="-ml-16">
+        <div class="flex items-center">
+            <p class='font-bold text-xl w-full'>{{nft.collectionName}}</p>
+            <div class="flex justify-end">
+                <!-- Share -->
+                <a
+                    class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
+                    <fa-icon [icon]="faShareNodes" class="text-gray-900" size="lg"></fa-icon>
+                </a>
+                <!-- Ellipsis Menu -->
+                <a data-dropdown-toggle="profilEllipsisDropdown"
+                    class="flex justify-center items-center mx-1.5 bg-white w-12 h-12 rounded-full hover:shadow-xl cursor-pointer">
+                    <fa-icon [icon]="faEllipsis" class="text-gray-900" size="lg"></fa-icon>
+                </a>
             </div>
-            <p class='font-bold text-4xl mb-2'>{{nft.name}}</p>
-            <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500"> {{collection.username}}</a></p>
-
-            <!-- Price and Add to cart Card -->
-            <app-price-card [nft]="nft"></app-price-card>
-
-            <app-item-description-card [collection]="collection"></app-item-description-card>
         </div>
+        <p class='font-bold text-4xl mb-2'>{{nft.name}}</p>
+        <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500">
+                {{collection.username}}</a></p>
 
+        <!-- Price and Add to cart Card -->
+        <app-price-card [nft]="nft"></app-price-card>
 
-        <!-- Ellipsis Dropdown menu -->
-        <div id="profilEllipsisDropdown"
-            class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-2xl">
-            <ul class="text-sm text-gray-700" aria-labelledby="profilEllipsisDropdown">
-                <li>
-                    <a href="#"
-                        class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
-                            [icon]="faGlobe" class="mr-4" size="lg"></fa-icon> View website</a>
-                </li>
-                <li>
-                    <a href="#" data-modal-toggle="crypto-modal"
-                        class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
-                            [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
-                </li>
-            </ul>
-        </div>
+        <app-item-description-card [collection]="collection"></app-item-description-card>
     </div>
 
-    <app-more-items-card></app-more-items-card>
+
+    <!-- Ellipsis Dropdown menu -->
+    <div id="profilEllipsisDropdown" class="hidden z-10 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-2xl">
+        <ul class="text-sm text-gray-700" aria-labelledby="profilEllipsisDropdown">
+            <li>
+                <a (click)="goTo(collection.website)"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg cursor-pointer"><fa-icon
+                        [icon]="faGlobe" class="mr-4" size="lg"></fa-icon> View website</a>
+            </li>
+            <li>
+                <a href="#" data-modal-toggle="crypto-modal"
+                    class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
+                        [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
+            </li>
+        </ul>
+    </div>
 </div>
+
+<app-more-items-card [nfts]="nfts"></app-more-items-card>
