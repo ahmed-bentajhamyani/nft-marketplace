@@ -19,6 +19,10 @@ import { ItemComponent } from './components/item/item.component';
 import { PriceCardComponent } from './components/price-card/price-card.component';
 import { ItemDescriptionCardComponent } from './components/item-description-card/item-description-card.component';
 import { MoreItemsCardComponent } from './components/more-items-card/more-items-card.component';
+import { ItemFormComponent } from './components/item-form/item-form.component';
+import { FormsModule } from '@angular/forms';
+import { CollectionEditFormComponent } from './components/collection-edit-form/collection-edit-form.component';
+import { ItemEditFormComponent } from './components/item-edit-form/item-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +40,18 @@ import { MoreItemsCardComponent } from './components/more-items-card/more-items-
     ItemComponent,
     PriceCardComponent,
     ItemDescriptionCardComponent,
-    MoreItemsCardComponent
+    MoreItemsCardComponent,
+    ItemFormComponent,
+    CollectionEditFormComponent,
+    ItemEditFormComponent
   ],
   imports: [
     BrowserModule,
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

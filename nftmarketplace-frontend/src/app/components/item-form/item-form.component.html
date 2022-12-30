@@ -1,0 +1,47 @@
+<div class="font-bold mt-4 px-80">
+    <div class='mb-4'>
+        <h1 class='text-4xl'>Create New Item</h1>
+    </div>
+    <div class="mb-10">
+        <div class="mb-6">
+            <label class="block text-base text-gray-700" for="user_avatar">Image of your Item</label>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="description_help">File types supported: JPG,
+                PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</div>
+            <div class="flex items-center justify-center font-normal w-full">
+                <label for="dropzone-file"
+                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <fa-icon [icon]="faCloudArrowUp" class="mr-4 text-gray-500" size="2x"></fa-icon>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
+                                upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max size: 100 MB)</p>
+                    </div>
+                    <input id="dropzone-file" type="file" class="hidden" />
+                </label>
+            </div>
+        </div>
+        <div class="mb-6">
+            <label for="name" class="block mb-2.5 text-base text-gray-700">Name</label>
+            <input type="text" id="name" name="name" [(ngModel)]="Nft.name"
+                class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                placeholder="Item name" required>
+        </div>
+        <div class="mb-6">
+            <label for="price" class="block text-base text-gray-700">Price</label>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="price_help">Enter price to allow users instantly purchase your NFT</div>
+            <input type="number" id="price" name="price" [(ngModel)]="Nft.price"
+                class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                placeholder="Enter price of your item" required>
+        </div>
+        <div class="mb-6">
+            <label for="collection" class="block text-base text-gray-700">Collection</label>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="collection_help">Choose the collection that your item belongs to</div>
+            <select name="collectionName" [(ngModel)]="Nft.collectionName" id="collection"
+                class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                <option *ngFor="let collection of collections" [ngValue]="collection.name">{{collection.name}}</option>
+            </select>
+        </div>
+        <button (click)="persistNft()"
+            class="text-white bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-base w-full sm:w-auto px-5 py-3.5 text-center">Create</button>
+    </div>
+</div>
