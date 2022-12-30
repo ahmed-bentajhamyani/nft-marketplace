@@ -20,8 +20,10 @@
                                 class="font-bold text-gray-800 text-xl">4.5</span> ETH</p>
                         <p class="text-sm text-gray-500 self-center">Creator fee : 5%</p>
                         <ng-container *ngIf="nftsInCollection[collection.name] != null">
-                            <div *ngFor="let nft of nftsInCollection[collection.name]" class="flex items-start">
-                                <img class="m-3 rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                            <div class="flex">
+                                <a *ngFor="let nft of nftsInCollection[collection.name].slice(0, 4);" [routerLink]="['item', nft.name]" class="rounded-xl m-3 hover:ring-4 hover:ring-neutral-200">
+                                    <img class="rounded-xl" src="assets/logo/photo.avif" alt="" width="80px" />
+                                </a>
                             </div>
                         </ng-container>
                     </a>

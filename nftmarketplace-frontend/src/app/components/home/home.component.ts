@@ -59,7 +59,7 @@ export class HomeComponent {
   }
 
   getNfs() {
-    this.nftService.getNFTs().subscribe(reponse => {
+    this.nftService.getNfts().subscribe(reponse => {
       this.nfts = reponse;
     })
   }
