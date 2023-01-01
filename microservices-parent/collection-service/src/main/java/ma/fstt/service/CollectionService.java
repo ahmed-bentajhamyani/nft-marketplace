@@ -22,7 +22,7 @@ public class CollectionService {
     }
 
     public void createCollection(Collection col) {
-        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), LocalDate.now(), col.getCategoryName(), col.getUsername());
+        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), LocalDate.now(), col.getCategoryName(), col.getUsername(), col.getImageName());
         collectionRepository.insert(collection);
     }
 
@@ -36,6 +36,7 @@ public class CollectionService {
                     collection.setDiscord(col.getDiscord());
                     collection.setTwitter(col.getTwitter());
                     collection.setCategoryName(col.getCategoryName());
+                    collection.setImageName(col.getImageName());
                     return collectionRepository.save(collection);
                 })
                 .orElseGet(() -> {

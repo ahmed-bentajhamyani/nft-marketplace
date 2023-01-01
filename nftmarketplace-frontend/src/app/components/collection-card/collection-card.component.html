@@ -1,6 +1,10 @@
 <div class="bg-white rounded-xl shadow-lg mx-3 w-64 h-full">
     <a [routerLink]="['collection', collection.name]">
-        <img class="rounded-t-xl" src="assets/logo/photo.avif" alt="" width="256px" height="5px" />
+        <img *ngIf="retrievedImage != null" class="rounded-t-xl w-64" [src]="retrievedImage" alt="" />
+        <div *ngIf="retrievedImage == null"
+            class="flex justify-center items-center rounded-t-xl w-64 h-64 bg-gray-100">
+            <fa-icon [icon]="faImage" class="text-gray-200" size="6x"></fa-icon>
+        </div>
         <div class="px-5 py-3">
 
             <h5 class="text-xl font-bold tracking-tight text-gray-900 truncate">{{collection.name}}</h5>

@@ -4,21 +4,32 @@
     </div>
     <div class="mb-10">
         <div class="mb-6">
-            <label class="block text-base text-gray-700" for="user_avatar">Image of your collection</label>
+            <label class="block text-base text-gray-700" for="user_avatar">Image of your Collection</label>
             <div class="font-medium text-xs text-gray-500 mb-2.5" id="user_avatar_help">File types supported: JPG,
                 PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</div>
 
             <div class="flex items-center justify-center font-normal w-full">
-                <label for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <fa-icon [icon]="faCloudArrowUp" class="mr-4 text-gray-500" size="2x"></fa-icon>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
-                                upload</span> or drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max size: 100 MB)</p>
-                    </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
-                </label>
+                <ng-container *ngIf="imagePreviewUrl == null">
+                    <label for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <fa-icon [icon]="faCloudArrowUp" class="mr-4 text-gray-500" size="2x"></fa-icon>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
+                                    to
+                                    upload</span> or drag and drop</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max size: 100
+                                MB)
+                            </p>
+                        </div><input id="dropzone-file" type="file" class="hidden" (change)="onFileChanged($event)" />
+                    </label>
+                </ng-container>
+                <ng-container *ngIf="imagePreviewUrl != null">
+                    <label for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-full h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                        <img class="rounded-lg w-full aspect-square" [src]="imagePreviewUrl" alt="" />
+                        <input id="dropzone-file" type="file" class="hidden" (change)="onFileChanged($event)" />
+                    </label>
+                </ng-container>
             </div>
         </div>
         <div class="mb-6">
@@ -45,7 +56,8 @@
         </div>
         <div class="mb-6">
             <label for="website" class="block text-base text-gray-700">Website</label>
-            <div class="font-medium text-xs text-gray-500 mb-2.5" id="website_help">Include a link to this URL on this item's detail page, so that users can click to learn more about it.</div>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="website_help">Include a link to this URL on this
+                item's detail page, so that users can click to learn more about it.</div>
             <input type="url" id="website" name="website" [(ngModel)]="Collection.website"
                 class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
                 placeholder="https://yousite.io/item/123" required>
@@ -64,8 +76,9 @@
         </div>
         <div class="mb-6">
             <label for="category" class="block text-base text-gray-700">Category</label>
-            <div class="font-medium text-xs text-gray-500 mb-2.5" id="category_help">Choose the category that your collection belongs to</div>
-            <select id="category"  name="categoryName" [(ngModel)]="Collection.categoryName"
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="category_help">Choose the category that your
+                collection belongs to</div>
+            <select id="category" name="categoryName" [(ngModel)]="Collection.categoryName"
                 class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
                 <option *ngFor="let category of categories" [ngValue]="category.name">{{category.name}}</option>
             </select>

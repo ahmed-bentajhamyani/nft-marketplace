@@ -14,15 +14,15 @@ public class NFT {
     @Id
     private String id;
     private String name;
-    private String image;
     private float price;
     private String collectionName;
+    private String imageName;
 
-    public NFT(String name, String image, float price, String collectionName) {
+    public NFT(String name, float price, String collectionName, String imageName) {
         super();
         this.name = name;
-        this.image = image;
         this.price = price;
         this.collectionName = collectionName;
+        this.imageName = imageName;
     }
 }

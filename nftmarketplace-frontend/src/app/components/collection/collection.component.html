@@ -1,7 +1,12 @@
 <div class="mt-5">
 
-    <div class="rounded-lg shadow-lg p-2 w-48 h-full mb-4">
-        <img class="rounded-lg" src="assets/logo/photo.avif" alt="" width="180px" height="5px" />
+    <div class="flex justify-center items-center rounded-lg border shadow-lg p-2 w-48 h-full mb-4">
+        <img *ngIf="retrievedCollectionImage != null" class="rounded-lg w-[180px]" [src]="retrievedCollectionImage"
+            alt="" />
+        <div *ngIf="retrievedCollectionImage == null"
+            class="flex justify-center items-center rounded-lg w-[180px] h-48 bg-gray-100">
+            <fa-icon [icon]="faImage" class="text-gray-200" size="4x"></fa-icon>
+        </div>
     </div>
 
     <div class='mb-7'>
@@ -70,7 +75,7 @@
         <div *ngIf="nfts != null" class="grid grid-cols-5">
             <!-- Items -->
             <ng-container *ngFor="let nft of nfts">
-                <app-item-card [nft]="nft"></app-item-card>
+                <app-item-card [nft]="nft" [retrievedImage]="retrievedNftImages[nft.name]"></app-item-card>
             </ng-container>
         </div>
     </div>

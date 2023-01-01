@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight, faImage } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/models/category';
-import { NFT } from 'src/app/models/nft';
 import { CategoryService } from 'src/app/services/category.service';
 import { CollectionService } from 'src/app/services/collection.service';
+import { ImageService } from 'src/app/services/image.service';
 import { NftService } from 'src/app/services/nft.service';
 
 @Component({
@@ -19,13 +18,21 @@ export class HomeComponent {
   nftsInCollection: { [key: string]: any[]; } = { "": [] };
   notEmptyCategories: Array<Category> = [];
 
+  retrieveResponse: any;
+  base64Data: any;
+  retrievedCollectionImages: { [key: string]: any } = { "": "" };
+  retrievedNftImages: { [key: string]: any } = { "": "" };
+
   // Slider
   slider: any;
   defaultTransform: any;
   faChevronLeft = faChevronLeft;
   faChevronRight = faChevronRight;
 
-  constructor(private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService, private httpClient: HttpClient) { }
+  // Icons
+  faImage = faImage;
+
+  constructor(private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.getCollections();
@@ -53,9 +60,18 @@ export class HomeComponent {
       this.collections = reponse;
       this.getCategories();
       for (let collection of this.collections) {
+        this.getCollectionImage(collection);
         this.getNftsByCollectionName(collection.name);
       }
     })
+  }
+
+  getCollectionImage(collection: any) {
+    this.imageService.getImage(collection.imageName).subscribe(response => {
+      this.retrieveResponse = response;
+      this.base64Data = this.retrieveResponse.picByte;
+      this.retrievedCollectionImages[collection.name] = 'data:image/jpeg;base64,' + this.base64Data;
+    });
   }
 
   getNfs() {
@@ -67,7 +83,18 @@ export class HomeComponent {
   getNftsByCollectionName(collectionName: any) {
     this.nftService.getNftsByCollectionName(collectionName).subscribe(reponse => {
       this.nftsInCollection[collectionName] = reponse;
+      for (let nft of this.nftsInCollection[collectionName]) {
+        this.getNftImage(nft);
+      }
     })
+  }
+
+  getNftImage(nft: any) {
+    this.imageService.getImage(nft.imageName).subscribe(response => {
+      this.retrieveResponse = response;
+      this.base64Data = this.retrieveResponse.picByte;
+      this.retrievedNftImages[nft.name] = 'data:image/jpeg;base64,' + this.base64Data;
+    });
   }
 
   // Slider

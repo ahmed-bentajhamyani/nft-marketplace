@@ -4,6 +4,7 @@ import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from 'src/app/models/collection';
 import { CategoryService } from 'src/app/services/category.service';
 import { CollectionService } from 'src/app/services/collection.service';
+import { ImageService } from 'src/app/services/image.service';
 import { NftService } from 'src/app/services/nft.service';
 
 @Component({
@@ -17,22 +18,31 @@ export class CollectionEditFormComponent {
   Collection: Collection = {
     name: '',
     description: '',
-    image: '',
     items: 0,
     website: '',
     discord: '',
     twitter: '',
     createdAt: new Date(),
     categoryName: '',
-    username: ''
+    username: '',
+    imageName: ''
   }
 
+  // To update the nft collection name
   oldCollectionName: any;
+
+  selectedFile: any;
+
+  retrieveResponse: any;
+  base64Data: any;
+  retrievedImage: any;
+
+  imagePreviewUrl: any;
 
   // Icons
   faCloudArrowUp = faCloudArrowUp;
 
-  constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.getCategories();
@@ -52,12 +62,22 @@ export class CollectionEditFormComponent {
   getCollectionByName(name: any) {
     this.collectionService.getCollectionByName(name).subscribe(response => {
       this.Collection = response;
+      this.getImage( this.Collection.imageName);
       this.oldCollectionName = this.Collection.name;
     })
   }
 
+  getImage(imageName: any) {
+    this.imageService.getImage(imageName).subscribe(response => {
+      this.retrieveResponse = response;
+      this.base64Data = this.retrieveResponse.picByte;
+      this.imagePreviewUrl = 'data:image/jpeg;base64,' + this.base64Data;
+    });
+  }
+
   updateCollection() {
     this.collectionService.updateCollection(this.Collection).subscribe(() => {
+      this.onUpload();
       this.updateNftCollectionName(this.Collection.name);
       this.router.navigate(['collection', this.Collection.name]);
       this.resetCollection();
@@ -73,23 +93,49 @@ export class CollectionEditFormComponent {
     })
   }
 
+  deleteCollection() {
+    this.collectionService.deleteCollection(this.Collection.id).subscribe(() => {
+      this.router.navigate(['']);
+    })
+  }
+
   resetCollection() {
     this.Collection = {
       name: '',
       description: '',
-      image: '',
       items: 0,
       website: '',
       discord: '',
       twitter: '',
       createdAt: new Date(),
       categoryName: '',
-      username: ''
+      username: '',
+      imageName: ''
     }
   }
 
-  deleteCollection() {
-    this.collectionService.deleteCollection(this.Collection.id).subscribe(() => { })
+  onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0];
+    this.readImage(this.selectedFile);
+    this.Collection.imageName = this.selectedFile.name;
+  }
+
+  readImage(selectedImage: any) {
+    if (selectedImage) {
+      var reader = new FileReader();
+      reader.readAsDataURL(selectedImage);
+      reader.onloadend = (event) => {
+        if (event.target)
+          this.imagePreviewUrl = event.target.result;
+      };
+    }
+  }
+
+  onUpload() {
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+    this.imageService.uploadImage(uploadImageData);
   }
 
 }

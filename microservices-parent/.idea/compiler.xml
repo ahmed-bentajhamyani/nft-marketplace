@@ -14,6 +14,7 @@
         <module name="collection-service" />
         <module name="user-service" />
         <module name="wallet-service" />
+        <module name="image-service" />
       </profile>
     </annotationProcessing>
   </component>
@@ -22,6 +23,7 @@
       <module name="cart-service" options="-parameters" />
       <module name="category-service" options="-parameters" />
       <module name="collection-service" options="-parameters" />
+      <module name="image-service" options="-parameters" />
       <module name="nft-service" options="-parameters" />
       <module name="transaction-service" options="-parameters" />
       <module name="user-service" options="-parameters" />

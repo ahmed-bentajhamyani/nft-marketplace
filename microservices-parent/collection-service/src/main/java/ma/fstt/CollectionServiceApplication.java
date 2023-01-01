@@ -16,16 +16,7 @@ import java.time.LocalDate;
 @EnableMongoRepositories(basePackages = "ma.fstt.repository")
 @EnableFeignClients
 public class CollectionServiceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(CollectionServiceApplication.class, args);
-    }
-
-    @Bean
-    CommandLineRunner runner(CollectionService collectionService) {
-        return args -> {
-			Collection collection = new Collection("Dracula", "Dracula dark", 12, "www.com", "DWWW", "TWWW", LocalDate.now(), "Art", "ahmedep");
-            //collectionService.createCollection(collection);
-        };
     }
 }

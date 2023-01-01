@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from 'src/app/models/collection';
 
 @Component({
@@ -9,6 +10,12 @@ import { Collection } from 'src/app/models/collection';
 export class CollectionCardComponent {
   @Input()
   collection!: Collection;
+
+  @Input()
+  retrievedImage: any;
+
+  // Icons
+  faImage = faImage;
 
   constructor() { }
 }

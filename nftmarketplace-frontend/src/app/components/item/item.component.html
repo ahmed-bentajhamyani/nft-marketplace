@@ -3,11 +3,17 @@
         class="font-bold text-lg mb-3 px-16 py-4 text-center rounded-lg text-blue-500 bg-white border-2 hover:shadow focus:outline-none focus:ring-blue-300">Edit</a>
 </div>
 <div class="grid grid-cols-2">
-    <img class="rounded-xl" src="assets/logo/photo.avif" alt="" width="500px" />
+    <img *ngIf="retrievedImages[nft.name] != null" class="rounded-xl" [src]="retrievedImages[nft.name]" alt=""
+        width="500px" />
+    <div *ngIf="retrievedImages[nft.name] == null"
+        class="flex justify-center items-center rounded-lg w-[500px] bg-gray-100">
+        <fa-icon [icon]="faImage" class="text-gray-200" size="9x"></fa-icon>
+    </div>
 
     <div class="-ml-16">
         <div class="flex items-center">
-            <p class='font-bold text-xl w-full'>{{nft.collectionName}}</p>
+            <p class='text-lg w-full text-blue-500'><a
+                    [href]="['collection/' + nft.collectionName]">{{nft.collectionName}}</a></p>
             <div class="flex justify-end">
                 <!-- Share -->
                 <a
@@ -49,4 +55,4 @@
     </div>
 </div>
 
-<app-more-items-card [nfts]="nfts"></app-more-items-card>
+<app-more-items-card [nfts]="nfts" [retrievedImages]="retrievedImages"></app-more-items-card>

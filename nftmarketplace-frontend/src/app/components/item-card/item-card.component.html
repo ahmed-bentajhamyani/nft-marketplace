@@ -1,6 +1,9 @@
 <div class="flex flex-col justify-between m-3 bg-white rounded-lg shadow-lg w-48 h-[300px]">
     <a [href]="['item/' + nft.name]" class="cursor-pointer">
-        <img class="rounded-t-lg" src="assets/logo/photo.avif" alt="" width="192px" height="5px" />
+        <img *ngIf="retrievedImage != null" class="rounded-t-lg w-48 h-48 object-cover" [src]="retrievedImage" alt="" />
+        <div *ngIf="retrievedImage == null" class="flex justify-center items-center rounded-t-lg w-48 h-48 bg-gray-100">
+            <fa-icon [icon]="faImage" class="text-gray-200" size="5x"></fa-icon>
+        </div>
         <div class="px-3.5 py-3">
             <h5 class="text-base font-bold tracking-tight text-gray-900 truncate">{{nft.name}}</h5>
             <p class="font-bold text-gray-700">{{nft.price}}<span class="text-gray-600 text-sm"> ETH</span></p>

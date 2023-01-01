@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faEthereum } from '@fortawesome/free-brands-svg-icons';
-import { faEllipsis, faFlag, faGlobe, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faFlag, faGlobe, faImage, faShareNodes } from '@fortawesome/free-solid-svg-icons';
 import { CollectionService } from 'src/app/services/collection.service';
+import { ImageService } from 'src/app/services/image.service';
 import { NftService } from 'src/app/services/nft.service';
 
 @Component({
@@ -15,14 +16,19 @@ export class ItemComponent {
   nfts: any;
   collection: any;
 
+  retrieveResponse: any;
+  base64Data: any;
+  retrievedImages: { [key: string]: any } = { "": "" };
+
   // Icons
   faShareNodes = faShareNodes;
   faEllipsis = faEllipsis;
   faEthereum = faEthereum;
   faGlobe = faGlobe;
   faFlag = faFlag;
+  faImage = faImage;
 
-  constructor(private route: ActivatedRoute, private nftService: NftService, private collectionService: CollectionService) { }
+  constructor(private route: ActivatedRoute, private nftService: NftService, private collectionService: CollectionService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -35,6 +41,7 @@ export class ItemComponent {
   getNftByName(name: any) {
     this.nftService.getNftByName(name).subscribe(response => {
       this.nft = response;
+      this.getImage(this.nft);
       this.collectionService.getCollectionByName(this.nft.collectionName).subscribe(collection => {
         this.collection = collection;
         this.getNftsByName(this.nft.collectionName);
@@ -46,7 +53,18 @@ export class ItemComponent {
     this.nftService.getNftsByCollectionName(collectionName).subscribe(response => {
       this.nfts = response;
       this.nfts = this.nfts.filter((nft: any) => nft.id !== this.nft.id);
+      for (let nft of this.nfts) {
+        this.getImage(nft);
+      }
     })
+  }
+
+  getImage(nft: any) {
+    this.imageService.getImage(nft.imageName).subscribe(response => {
+      this.retrieveResponse = response;
+      this.base64Data = this.retrieveResponse.picByte;
+      this.retrievedImages[nft.name] = 'data:image/jpeg;base64,' + this.base64Data;
+    });
   }
 
   // Redirect to an external URL

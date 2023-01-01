@@ -12,12 +12,4 @@ public class NFTServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(NFTServiceApplication.class, args);
     }
-
-    @Bean
-    CommandLineRunner runner(NFTService nftService) {
-        return args -> {
-            NFT nft = new NFT("Dracula NFT", "", 12, "Dracula");
-            // nftService.createNFT(nft);
-        };
-    }
 }

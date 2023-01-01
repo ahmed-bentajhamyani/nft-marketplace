@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { faImage } from '@fortawesome/free-solid-svg-icons';
 import { NFT } from 'src/app/models/nft';
 
 @Component({
@@ -10,5 +11,11 @@ export class ItemCardComponent {
   @Input()
   nft!: NFT;
 
-  constructor() {}
+  @Input()
+  retrievedImage: any;
+
+  // Icons
+  faImage = faImage;
+
+  constructor() { }
 }

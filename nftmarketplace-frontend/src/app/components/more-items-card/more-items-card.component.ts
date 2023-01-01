@@ -13,4 +13,7 @@ export class MoreItemsCardComponent {
 
   @Input()
   nfts!: NFT[];
+
+  @Input()
+  retrievedImages: any;
 }

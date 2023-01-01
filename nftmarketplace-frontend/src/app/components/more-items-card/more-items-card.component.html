@@ -4,9 +4,9 @@
             <fa-icon [icon]="faGrip" size="lg"></fa-icon> More from this Collection
         </p>
     </div>
-    <div class="flex justify-between items-center bg-slate-50 p-4 overflow-y-auto">
+    <div class="flex items-center bg-slate-50 p-4 overflow-y-auto">
         <ng-container *ngFor="let nft of nfts">
-            <app-item-card [nft]="nft"></app-item-card>
+            <app-item-card [nft]="nft" [retrievedImage]="retrievedImages[nft.name]"></app-item-card>
         </ng-container>
     </div>
 </div>

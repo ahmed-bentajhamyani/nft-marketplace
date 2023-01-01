@@ -4,7 +4,6 @@ export interface Collection {
     id?: string;
     name: string;
     description: string;
-    image: string;
     items: number;
     website: string;
     discord: string;
@@ -12,4 +11,5 @@ export interface Collection {
     createdAt: Date;
     categoryName: string;
     username: String;
+    imageName: String
 }
