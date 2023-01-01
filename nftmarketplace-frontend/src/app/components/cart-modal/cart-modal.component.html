@@ -19,14 +19,14 @@
             <div class="p-6 border-b max-h-80 overflow-y-auto">
                 <div class="flex justify-between items-center">
                     <p class="font-bold text-gray-800">1 Item</p>
-                    <button type="submit"
+                    <button (click)="clearCart()"
                         class="text-white text-xs rounded-lg px-4 py-2.5 text-center bg-rose-500 hover:bg-rose-700 focus:ring-4 focus:outline-none focus:ring-rose-300">Clear
                         all</button>
                 </div>
                 <ul class="my-4">
                     <li class="flex justify-between items-center rounded-xl hover:bg-gray-100">
                         <a href="" class="flex items-center w-full">
-                            <img class="p-3" src="assets/logo/photo.avif" alt="" width="100px" height="120px" />
+                            <!-- <img class="p-3" src="assets/logo/photo.avif" alt="" width="100px" height="120px" /> -->
                             <div class="flex flex-col items-start mx-4">
                                 <p class="font-bold text-gray-800">Item name</p>
                                 <p class="text-gray-800">4.5 ETH</p>

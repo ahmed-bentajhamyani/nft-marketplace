@@ -27,12 +27,12 @@ public class CartController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCart(@PathVariable("id") String id) {
+    public void deleteCart(@PathVariable String id) {
         repository.deleteById(id);
     }
 
     @GetMapping("/{id}")
-    public Optional<Cart> getOneCart(@PathVariable("id") String id) {
+    public Optional<Cart> getOneCart(@PathVariable String id) {
         return repository.findById(id);
     }
 
