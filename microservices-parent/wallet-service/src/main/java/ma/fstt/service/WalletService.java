@@ -16,13 +16,17 @@ public class WalletService {
     @Autowired
     WalletRepository walletRepository;
 
+    public List<Wallet> getAll() {
+        return walletRepository.findAll();
+    }
+
+    public Wallet findWalletByHash(String hash) {
+        return walletRepository.findWalletByHash(hash);
+    }
+
     public void save(Wallet wallet) {
         Wallet w = new Wallet(wallet.getHash(), wallet.getSolde());
         walletRepository.insert(w);
-    }
-
-    public List<Wallet> getAll() {
-        return walletRepository.findAll();
     }
 
     public void update(String id, Wallet wallet) {
@@ -32,16 +36,12 @@ public class WalletService {
                     return walletRepository.save(wal);
                 })
                 .orElseGet(() -> {
-                    wallet.setIdWallet(id);
+                    wallet.setId(id);
                     return walletRepository.save(wallet);
                 });
     }
 
     public void delete(String id) {
         walletRepository.deleteById(id);
-    }
-
-    public Optional<Wallet> findById(String id) {
-        return walletRepository.findById(id);
     }
 }

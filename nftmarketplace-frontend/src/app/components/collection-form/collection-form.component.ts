@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from 'src/app/models/collection';
 import { Image } from 'src/app/models/image';
 import { CategoryService } from 'src/app/services/category.service';
@@ -14,6 +14,7 @@ import { ImageService } from 'src/app/services/image.service';
 })
 export class CollectionFormComponent {
   categories: any;
+  user: any;
 
   Collection: Collection = {
     name: '',
@@ -24,7 +25,7 @@ export class CollectionFormComponent {
     twitter: '',
     createdAt: new Date(),
     categoryName: '',
-    username: '',
+    userHash: '',
     imageName: ''
   }
 
@@ -39,6 +40,7 @@ export class CollectionFormComponent {
 
   // Icons
   faCloudArrowUp = faCloudArrowUp;
+  faClose = faClose;
 
   constructor(private categoryService: CategoryService, private collectionService: CollectionService, private imageService: ImageService, private router: Router) { }
 
@@ -54,9 +56,12 @@ export class CollectionFormComponent {
   }
 
   persistCollection() {
+    this.user = sessionStorage.getItem('user');
+    this.user = JSON.parse(this.user);
+    this.Collection.userHash = this.user.hash;
     this.collectionService.persistCollection(this.Collection).subscribe(() => {
       this.onUpload();
-      this.router.navigate(['collection', this.Collection.name]);
+      this.router.navigate(['/collection', this.Collection.name]);
       this.resetCollection();
     })
   }
@@ -71,7 +76,7 @@ export class CollectionFormComponent {
       twitter: '',
       createdAt: new Date(),
       categoryName: '',
-      username: '',
+      userHash: '',
       imageName: ''
     }
   }
@@ -97,8 +102,11 @@ export class CollectionFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append("imageFile", this.selectedFile, this.selectedFile.name);
 
-    console.log(uploadImageData.get("imageFile"));
-    this.imageService.uploadImage(uploadImageData);
+    this.imageService.uploadImage(uploadImageData).subscribe(() => { });
+  }
+
+  deleteImage() {
+    this.imagePreviewUrl = null;
   }
 
 }

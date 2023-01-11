@@ -15,7 +15,7 @@ public class CollectionController {
     private CollectionService collectionService;
 
     @GetMapping
-    public List<Collection> getAllCategories() {
+    public List<Collection> getAllCollections() {
         return collectionService.getAllCollections();
     }
 
@@ -24,18 +24,23 @@ public class CollectionController {
         return collectionService.getCollectionByName(name);
     }
 
+    @GetMapping("/user/{userHash}")
+    public List<Collection> getCollectionsByUsername(@PathVariable String userHash) {
+        return collectionService.getCollectionsByUserHash(userHash);
+    }
+
     @PostMapping
-    public void createCategory(@RequestBody Collection collection) {
+    public void createCollection(@RequestBody Collection collection) {
         collectionService.createCollection(collection);
     }
 
     @PutMapping("/{id}")
-    public void updateCategory(@PathVariable String id, @RequestBody Collection collection) {
+    public void updateCollection(@PathVariable String id, @RequestBody Collection collection) {
         collectionService.updateCollection(id, collection);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable String id) {
+    public void deleteCollection(@PathVariable String id) {
         collectionService.deleteCollection(id);
     }
 }

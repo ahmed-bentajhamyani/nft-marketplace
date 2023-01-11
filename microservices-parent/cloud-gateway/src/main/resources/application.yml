@@ -1,0 +1,49 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: TRANSATION-SERVICE
+          uri: lb://TRANSATION-SERVICE
+          predicates:
+            - Path=/api/transactions/**
+        - id: CART-SERVICE
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/api/cart/**
+        - id: NFT-SERVICE
+          uri: lb://NFT-SERVICE
+          predicates:
+            - Path=/api/nfts/**
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/api/users/**
+        - id: WALLET-SERVICE
+          uri: lb://WALLET-SERVICE
+          predicates:
+            - Path=/api/wallets/**
+        - id: CATEGORY-SERVICE
+          uri: lb://CATEGORY-SERVICE
+          predicates:
+            - Path=/api/categories/**
+        - id: COLLECTION-SERVICE
+          uri: lb://COLLECTION-SERVICE
+          predicates:
+            - Path=/api/collections/**
+        - id: IMAGE-SERVICE
+          uri: lb://IMAGE-SERVICE
+          predicates:
+            - Path=/api/image/**

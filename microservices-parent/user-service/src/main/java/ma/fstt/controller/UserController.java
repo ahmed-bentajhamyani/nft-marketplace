@@ -19,31 +19,29 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll() {
-        List<User> users = userService.getAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public List<User> getAll() {
+        System.out.println("get users ---------------");
+        return userService.getAll();
+    }
+
+    @GetMapping("/{hash}")
+    public User getUserByHash(@PathVariable String hash) {
+        return userService.getUserByHash(hash);
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody User user) {
+    public void add(@RequestBody User user) {
+        System.out.println("persist users -------------------------");
         userService.save(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody User user) {
+    public void update(@PathVariable String id, @RequestBody User user) {
         userService.update(id, user);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+    public void delete(@PathVariable String id) {
         userService.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/{id}")
-    public Optional<User> findById(@PathVariable("id") String id) {
-        return userService.findById(id);
     }
 }

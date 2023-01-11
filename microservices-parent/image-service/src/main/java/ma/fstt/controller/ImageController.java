@@ -25,4 +25,9 @@ public class ImageController {
     public Image getImage(@PathVariable String name) throws IOException {
         return imageService.getImage(name);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteImage(@PathVariable String id) {
+        imageService.deleteImage(id);
+    }
 }

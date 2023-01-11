@@ -1,5 +1,5 @@
 <div class="flex justify-end items-end border-b mb-5">
-    <a [href]="['edit/item/'+ nft.name]"
+    <a [routerLink]="['/edit/item', nft.name]"
         class="font-bold text-lg mb-3 px-16 py-4 text-center rounded-lg text-blue-500 bg-white border-2 hover:shadow focus:outline-none focus:ring-blue-300">Edit</a>
 </div>
 <div class="grid grid-cols-2">
@@ -13,7 +13,7 @@
     <div class="-ml-16">
         <div class="flex items-center">
             <p class='text-lg w-full text-blue-500'><a
-                    [href]="['collection/' + nft.collectionName]">{{nft.collectionName}}</a></p>
+                    [routerLink]="['/collection', nft.collectionName]">{{nft.collectionName}}</a></p>
             <div class="flex justify-end">
                 <!-- Share -->
                 <a
@@ -28,8 +28,8 @@
             </div>
         </div>
         <p class='font-bold text-4xl mb-2'>{{nft.name}}</p>
-        <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a href="" class="text-blue-500">
-                {{collection.username}}</a></p>
+        <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a [routerLink]="['/account', user.hash]" class="text-blue-500">
+                {{user.username}}</a></p>
 
         <!-- Price and Add to cart Card -->
         <app-price-card [nft]="nft"></app-price-card>
@@ -47,7 +47,7 @@
                         [icon]="faGlobe" class="mr-4" size="lg"></fa-icon> View website</a>
             </li>
             <li>
-                <a href="#" data-modal-toggle="crypto-modal"
+                <a data-modal-toggle="crypto-modal"
                     class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
                         [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
             </li>
@@ -55,4 +55,6 @@
     </div>
 </div>
 
-<app-more-items-card [nfts]="nfts" [retrievedImages]="retrievedImages"></app-more-items-card>
+<ng-container *ngIf="nfts != null">
+    <app-more-items-card [nfts]="nfts" [retrievedImages]="retrievedImages"></app-more-items-card>
+</ng-container>

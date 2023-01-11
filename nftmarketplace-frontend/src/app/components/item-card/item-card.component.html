@@ -1,5 +1,5 @@
 <div class="flex flex-col justify-between m-3 bg-white rounded-lg shadow-lg w-48 h-[300px]">
-    <a [href]="['item/' + nft.name]" class="cursor-pointer">
+    <a [routerLink]="['/item', nft.name]" class="cursor-pointer">
         <img *ngIf="retrievedImage != null" class="rounded-t-lg w-48 h-48 object-cover" [src]="retrievedImage" alt="" />
         <div *ngIf="retrievedImage == null" class="flex justify-center items-center rounded-t-lg w-48 h-48 bg-gray-100">
             <fa-icon [icon]="faImage" class="text-gray-200" size="5x"></fa-icon>
@@ -9,7 +9,7 @@
             <p class="font-bold text-gray-700">{{nft.price}}<span class="text-gray-600 text-sm"> ETH</span></p>
         </div>
     </a>
-    <a [href]="['item/' + nft.name]"
+    <a [routerLink]="['/item', nft.name]"
         class="text-white font-bold text-sm w-full text-center rounded-b-lg py-2 bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 cursor-pointer">Add
         to cart</a>
 </div>

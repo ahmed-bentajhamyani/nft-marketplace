@@ -6,19 +6,21 @@ import { Injectable } from '@angular/core';
 })
 export class ImageService {
 
-  apiUrl = "http://localhost:8090/api/image";
+  apiUrl = "http://localhost:9191/api/image";
 
   constructor(private httpClient: HttpClient) { }
 
   uploadImage(data: any) {
     console.log("service : ")
     console.log(data.get("imageFile"));
-    return this.httpClient.post(`${this.apiUrl}`, data).subscribe(() =>  {
-      console.log("inside");
-    })
+    return this.httpClient.post(`${this.apiUrl}`, data);
   }
 
   getImage(imageName: any) {
     return this.httpClient.get(`${this.apiUrl}/${imageName}`);
+  }
+
+  deleteImage(id: any) {
+    return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 }

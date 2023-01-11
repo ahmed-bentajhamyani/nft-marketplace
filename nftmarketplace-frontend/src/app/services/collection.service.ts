@@ -7,7 +7,7 @@ import { Collection } from '../models/collection';
 })
 export class CollectionService {
 
-  apiUrl = "http://localhost:8089/api/collections";
+  apiUrl = "http://localhost:9191/api/collections";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,6 +17,10 @@ export class CollectionService {
 
   getCollectionByName(name: any) {
     return this.httpClient.get<Collection>(`${this.apiUrl}/${name}`);
+  }
+
+  getCollectionsByUserHash(userHash: any) {
+    return this.httpClient.get<Collection[]>(`${this.apiUrl}/user/${userHash}`);
   }
 
   deleteCollection(id: any) {

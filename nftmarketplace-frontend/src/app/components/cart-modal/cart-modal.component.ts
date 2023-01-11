@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { NftService } from 'src/app/services/nft.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -9,7 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./cart-modal.component.css']
 })
 export class CartModalComponent {
-
+  @Input() isActive: any;
 
   // Icons
   faXmark = faXmark;

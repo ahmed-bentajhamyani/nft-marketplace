@@ -1,13 +1,11 @@
 package ma.fstt;
 
-import ma.fstt.model.NFT;
-import ma.fstt.service.NFTService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
+@EnableEurekaServer
 public class NFTServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(NFTServiceApplication.class, args);

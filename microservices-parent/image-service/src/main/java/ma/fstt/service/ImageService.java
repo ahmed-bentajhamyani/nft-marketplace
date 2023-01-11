@@ -28,12 +28,16 @@ public class ImageService {
 
         final Image retrievedImage = imageRepository.findByName(imageName);
         if (retrievedImage != null) {
-            Image image = new Image(retrievedImage.getName(), retrievedImage.getType(),
+            Image image = new Image(retrievedImage.getId(), retrievedImage.getName(), retrievedImage.getType(),
                     retrievedImage.getPicByte());
             return image;
         } else {
             return null;
         }
+    }
+
+    public void deleteImage(String id) {
+        imageRepository.deleteById(id);
     }
 
     // compress the image bytes before storing it in the database

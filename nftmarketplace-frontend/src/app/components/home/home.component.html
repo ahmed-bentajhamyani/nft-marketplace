@@ -10,27 +10,30 @@
 
         <div class="rounded-xl border w-full my-3">
             <ul *ngFor="let collection of collections.slice(0, 5);" class="p-3">
-                <li class="rounded-xl hover:bg-gray-100">
-                    <a [href]="['collection/' + collection.name]" class="flex justify-between items w-full">
+                <li class="rounded-xl hover:bg-gray-50">
+                    <a [routerLink]="['collection', collection.name]" class="flex justify-between items-center w-full">
                         <div class="flex items-center">
                             <img *ngIf="retrievedCollectionImages[collection.name] != null"
                                 class="m-3 rounded-xl w-16 h-16 object-cover"
                                 [src]="retrievedCollectionImages[collection.name]" alt="" />
                             <div *ngIf="retrievedCollectionImages[collection.name] == null"
-                                class="flex justify-center items-center m-3 rounded-xl w-16 h-16 bg-gray-50">
-                                <fa-icon [icon]="faImage" class="text-gray-200" size="1x"></fa-icon>
+                                class="flex justify-center items-center m-3 rounded-xl w-16 h-16 bg-gray-100">
+                                <fa-icon [icon]="faImage" class="text-gray-300" size="1x"></fa-icon>
                             </div>
                             <p class="font-bold text-gray-800 text-lg truncate w-64">{{collection.name}}</p>
                         </div>
                         <p class="text-gray-500 text-sm self-center"><span
-                                class="font-bold text-gray-800 text-xl">4.5</span> ETH</p>
+                                class="font-bold text-gray-800 text-xl">{{floorPrice[collection.name]}}</span> ETH</p>
                         <p class="text-sm text-gray-500 self-center">Creator fee : 5%</p>
+
+                        <!-- Nfts -->
                         <ng-container *ngIf="nftsInCollection[collection.name] != null">
                             <div class="flex">
                                 <a *ngFor="let nft of nftsInCollection[collection.name].slice(0, 4);"
                                     [routerLink]="['item', nft.name]"
                                     class="rounded-xl m-3 hover:ring-4 hover:ring-neutral-200">
-                                    <img *ngIf="retrievedNftImages[nft.name] != null" class="rounded-xl w-20 h-20 object-cover" [src]="retrievedNftImages[nft.name]"
+                                    <img *ngIf="retrievedNftImages[nft.name] != null"
+                                        class="rounded-xl w-20 h-20 object-cover" [src]="retrievedNftImages[nft.name]"
                                         alt="" />
                                     <div *ngIf="retrievedNftImages[nft.name] == null"
                                         class="flex justify-center items-center rounded-xl w-20 h-20 bg-gray-50">

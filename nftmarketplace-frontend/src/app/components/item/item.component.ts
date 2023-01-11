@@ -5,6 +5,7 @@ import { faEllipsis, faFlag, faGlobe, faImage, faShareNodes } from '@fortawesome
 import { CollectionService } from 'src/app/services/collection.service';
 import { ImageService } from 'src/app/services/image.service';
 import { NftService } from 'src/app/services/nft.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-item',
@@ -15,6 +16,7 @@ export class ItemComponent {
   nft: any;
   nfts: any;
   collection: any;
+  user: any;
 
   retrieveResponse: any;
   base64Data: any;
@@ -28,7 +30,7 @@ export class ItemComponent {
   faFlag = faFlag;
   faImage = faImage;
 
-  constructor(private route: ActivatedRoute, private nftService: NftService, private collectionService: CollectionService, private imageService: ImageService) { }
+  constructor(private route: ActivatedRoute, private nftService: NftService, private collectionService: CollectionService, private userService: UserService, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -44,6 +46,7 @@ export class ItemComponent {
       this.getImage(this.nft);
       this.collectionService.getCollectionByName(this.nft.collectionName).subscribe(collection => {
         this.collection = collection;
+        this.getUserByHash();
         this.getNftsByName(this.nft.collectionName);
       })
     })
@@ -65,6 +68,13 @@ export class ItemComponent {
       this.base64Data = this.retrieveResponse.picByte;
       this.retrievedImages[nft.name] = 'data:image/jpeg;base64,' + this.base64Data;
     });
+  }
+
+  getUserByHash() {
+    this.userService.getUserByHash(this.collection.userHash).subscribe(response => {
+      this.user = response;
+      console.log(this.user);
+    })
   }
 
   // Redirect to an external URL

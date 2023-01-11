@@ -5,6 +5,7 @@ import { NftService } from 'src/app/services/nft.service';
 import { ActivatedRoute } from '@angular/router';
 import { CollectionService } from 'src/app/services/collection.service';
 import { ImageService } from 'src/app/services/image.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-collection',
@@ -14,6 +15,7 @@ import { ImageService } from 'src/app/services/image.service';
 export class CollectionComponent {
   collection: any;
   nfts: any;
+  user: any;
 
   retrieveResponse: any;
   base64Data: any;
@@ -30,7 +32,7 @@ export class CollectionComponent {
   faPenToSquare = faPenToSquare;
   faImage = faImage;
 
-  constructor(private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService, private route: ActivatedRoute) { }
+  constructor(private collectionService: CollectionService, private nftService: NftService, private userService: UserService, private imageService: ImageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -43,6 +45,7 @@ export class CollectionComponent {
   getCollectionByName(name: any) {
     this.collectionService.getCollectionByName(name).subscribe(reponse => {
       this.collection = reponse;
+      this.getUserByHash();
       this.getCollectionImage(this.collection.imageName);
       this.getNftsByCollectionName(this.collection.name);
     })
@@ -71,6 +74,13 @@ export class CollectionComponent {
       this.base64Data = this.retrieveResponse.picByte;
       this.retrievedNftImages[nft.name] = 'data:image/jpeg;base64,' + this.base64Data;
     });
+  }
+
+  getUserByHash() {
+    this.userService.getUserByHash(this.collection.userHash).subscribe(response => {
+      this.user = response;
+      console.log(this.user);
+    })
   }
 
   // Redirect to an external URL

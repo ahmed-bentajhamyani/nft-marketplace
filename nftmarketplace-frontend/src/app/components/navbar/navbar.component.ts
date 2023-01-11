@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { faShoppingCart, faCircleUser, faUser, faPencil, faGear, faHeart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faCircleUser, faUser, faPencil, faGear, faHeart, faSearch, faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
@@ -10,6 +10,8 @@ import { CategoryService } from 'src/app/services/category.service';
 export class NavbarComponent {
   categories: any;
   navbar: any;
+  user: any;
+  isActive: boolean = false;
 
   // Icons
   faShoppingCart = faShoppingCart;
@@ -19,18 +21,30 @@ export class NavbarComponent {
   faGear = faGear;
   faHeart = faHeart;
   faSearch = faSearch;
+  faLogout = faRightFromBracket;
 
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.getCategories();
     this.navbar = document.getElementById('navbar');
+    if (sessionStorage.getItem('user') != null) {
+      this.user = sessionStorage.getItem('user');
+      this.user = JSON.parse(this.user);
+      this.isActive = true;
+    }
   }
 
   getCategories() {
     this.categoryService.getCategories().subscribe(reponse => {
       this.categories = reponse;
     })
+  }
+
+  logout() {
+    sessionStorage.removeItem('hash');
+    sessionStorage.removeItem('user');
+    this.isActive = false;
   }
 
   // Sticky navbar

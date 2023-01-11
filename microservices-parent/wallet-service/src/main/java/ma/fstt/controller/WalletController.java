@@ -20,33 +20,28 @@ public class WalletController {
     WalletService walletservice;
 
     @GetMapping
-    public ResponseEntity<List<Wallet>> getAll() {
-        List<Wallet> users = walletservice.getAll();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+    public List<Wallet> getAll() {
+        return walletservice.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Wallet> findById(@PathVariable("id") String id) {
-        return walletservice.findById(id);
+    @GetMapping("/{hash}")
+    public Wallet getWalletByHash(@PathVariable String hash) {
+        return walletservice.findWalletByHash(hash);
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Wallet wallet) {
+    public void save(@RequestBody Wallet wallet) {
         walletservice.save(wallet);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable String id, @RequestBody Wallet wallet) {
+    public void update(@PathVariable String id, @RequestBody Wallet wallet) {
         walletservice.update(id, wallet);
-        return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") String id) {
+    public void delete(@PathVariable("id") String id) {
         walletservice.delete(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }

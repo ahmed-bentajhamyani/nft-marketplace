@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { NFT } from 'src/app/models/nft';
 import { CollectionService } from 'src/app/services/collection.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -26,6 +26,7 @@ export class ItemFormComponent {
 
   // Icons
   faCloudArrowUp = faCloudArrowUp;
+  faClose = faClose;
 
   constructor(private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService, private router: Router) { }
 
@@ -77,7 +78,11 @@ export class ItemFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData);
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
+  }
+
+  deleteImage() {
+    this.imagePreviewUrl = null;
   }
 
 }

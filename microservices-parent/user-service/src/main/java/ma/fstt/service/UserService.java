@@ -1,15 +1,12 @@
 package ma.fstt.service;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import java.util.Optional;
-
+import ma.fstt.model.User;
+import ma.fstt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ma.fstt.model.User;
-import ma.fstt.repository.UserRepository;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -18,8 +15,8 @@ public class UserService {
     UserRepository userRepository;
 
     public void save(User user) {
-        User use = new User(user.getUsername(), user.getEmail(), user.getProfilPicture(), LocalDate.now(), user.getWalletId());
-        userRepository.insert(use);
+        User newUser = new User(user.getUsername(), user.getEmail(), user.getProfilePicture(), user.getHash(), LocalDate.now());
+        userRepository.insert(newUser);
     }
 
     public List<User> getAll() {
@@ -28,10 +25,10 @@ public class UserService {
 
     public void update(String id, User user) {
         userRepository.findById(id).map(u -> {
-                    u.setWalletId(user.getWalletId());
                     u.setUsername(user.getUsername());
                     u.setEmail(user.getEmail());
-                    u.setProfilPicture(user.getProfilPicture());
+                    u.setProfilePicture(user.getProfilePicture());
+                    u.setHash(user.getHash());
                     return userRepository.save(u);
                 })
                 .orElseGet(() -> {
@@ -44,8 +41,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Optional<User> findById(String id) {
-        return userRepository.findById(id);
+    public User getUserByHash(String hash) {
+        return userRepository.findUserByHash(hash);
     }
 
 }

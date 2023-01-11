@@ -14,8 +14,8 @@ import { NftService } from 'src/app/services/nft.service';
 export class HomeComponent {
   collections: any;
   categories: any = [];
-  nfts: any;
   nftsInCollection: { [key: string]: any[]; } = { "": [] };
+  floorPrice: { [key: string]: any[]; } = { "": [] };
   notEmptyCategories: Array<Category> = [];
 
   retrieveResponse: any;
@@ -74,17 +74,17 @@ export class HomeComponent {
     });
   }
 
-  getNfs() {
-    this.nftService.getNfts().subscribe(reponse => {
-      this.nfts = reponse;
-    })
-  }
-
   getNftsByCollectionName(collectionName: any) {
     this.nftService.getNftsByCollectionName(collectionName).subscribe(reponse => {
       this.nftsInCollection[collectionName] = reponse;
+      this.floorPrice[collectionName] = this.nftsInCollection[collectionName][0].price;
       for (let nft of this.nftsInCollection[collectionName]) {
         this.getNftImage(nft);
+
+        // Calcul the floor price
+        if(nft.price < this.floorPrice[collectionName]) {
+          this.floorPrice[collectionName] = nft.price;
+        }
       }
     })
   }

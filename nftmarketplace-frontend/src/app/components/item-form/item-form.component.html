@@ -25,8 +25,9 @@
                 </ng-container>
                 <ng-container *ngIf="imagePreviewUrl != null">
                     <label for="dropzone-file"
-                        class="flex flex-col items-center justify-center w-full h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                        class="relative flex flex-col items-center justify-center w-full h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                         <img class="rounded-lg w-full aspect-square" [src]="imagePreviewUrl" alt="" />
+                        <p (click)="deleteImage()" class="absolute top-0 right-0 p-3"><fa-icon [icon]="faClose" class="text-gray-300" size="1x"></fa-icon></p>
                         <input id="dropzone-file" type="file" class="hidden" (change)="onFileChanged($event)" />
                     </label>
                 </ng-container>

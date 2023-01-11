@@ -42,24 +42,25 @@
                     <fa-icon [icon]="faEllipsis" class="text-gray-900" size="lg"></fa-icon>
                 </a>
 
-                <!-- Ellipsis Dropdown menu -->
+                <!-- Collection Ellipsis Dropdown menu -->
                 <div id="collectionEllipsisDropdown"
                     class="hidden z-5000 w-60 bg-white rounded-lg divide-y divide-gray-100 shadow-lg">
                     <ul class="text-sm text-gray-700" aria-labelledby="collectionEllipsisDropdown">
                         <li>
-                            <a [href]="['edit/collection/'+ collection.name]"
+                            <a [routerLink]="['/edit/collection', collection.name]"
                                 class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-t-lg"><fa-icon
                                     [icon]="faPenToSquare" class="mr-4" size="lg"></fa-icon> Edit</a>
-                            <a href="#"
-                                class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg"><fa-icon
-                                    [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
+                            <a
+                                class="flex items-center text-sm font-semibold py-3.5 px-4 hover:bg-gray-100 rounded-b-lg">
+                                <fa-icon [icon]="faFlag" class="mr-4" size="lg"></fa-icon> Report</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <p class='text-base text-gray-500 mb-1'>By <span class="font-bold text-gray-900">{{collection.username}}</span>
+        <p class='text-base text-gray-500 mb-1'>By <a [routerLink]="['/account', user.hash]"
+                class="font-bold text-gray-900">{{user.username}}</a>
         </p>
         <p class='text-base text-gray-500 mb-1'>Items <span class="font-bold text-gray-900">{{collection.items}}</span>
             · Created <span class="font-bold text-gray-900">{{collection.createdAt}}</span> · Category <span

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { NFT } from 'src/app/models/nft';
 import { CollectionService } from 'src/app/services/collection.service';
 import { ImageService } from 'src/app/services/image.service';
@@ -22,10 +22,16 @@ export class ItemEditFormComponent {
   }
 
   selectedFile: any;
+
+  retrieveResponse: any;
+  base64Data: any;
+  retrievedImage: any;
+  
   imagePreviewUrl: any;
 
   // Icons
   faCloudArrowUp = faCloudArrowUp;
+  faClose = faClose;
 
   constructor(private route: ActivatedRoute, private router: Router, private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService) { }
 
@@ -47,7 +53,17 @@ export class ItemEditFormComponent {
   getNftByName(name: any) {
     this.nftService.getNftByName(name).subscribe(response => {
       this.Nft = response;
+      this.getImage(this.Nft.imageName);
     })
+  }
+
+  getImage(imageName: any) {
+    this.imageService.getImage(imageName).subscribe(response => {
+      this.retrieveResponse = response;
+      console.log(this.retrieveResponse);
+      this.base64Data = this.retrieveResponse.picByte;
+      this.imagePreviewUrl = 'data:image/jpeg;base64,' + this.base64Data;
+    });
   }
 
   updateNft() {
@@ -94,6 +110,10 @@ export class ItemEditFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData);
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
+  }
+
+  deleteImage() {
+    this.imagePreviewUrl = null;
   }
 }

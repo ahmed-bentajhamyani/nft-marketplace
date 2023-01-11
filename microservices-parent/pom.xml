@@ -24,6 +24,8 @@
         <module>wallet-service</module>
         <module>nft-service</module>
         <module>image-service</module>
+        <module>service-registry</module>
+        <module>cloud-gateway</module>
     </modules>
 
     <properties>

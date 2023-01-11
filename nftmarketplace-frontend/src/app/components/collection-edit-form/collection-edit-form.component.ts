@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from 'src/app/models/collection';
 import { CategoryService } from 'src/app/services/category.service';
 import { CollectionService } from 'src/app/services/collection.service';
@@ -24,7 +24,7 @@ export class CollectionEditFormComponent {
     twitter: '',
     createdAt: new Date(),
     categoryName: '',
-    username: '',
+    userHash: '',
     imageName: ''
   }
 
@@ -41,6 +41,7 @@ export class CollectionEditFormComponent {
 
   // Icons
   faCloudArrowUp = faCloudArrowUp;
+  faClose = faClose;
 
   constructor(private route: ActivatedRoute, private router: Router, private categoryService: CategoryService, private collectionService: CollectionService, private nftService: NftService, private imageService: ImageService) { }
 
@@ -62,7 +63,7 @@ export class CollectionEditFormComponent {
   getCollectionByName(name: any) {
     this.collectionService.getCollectionByName(name).subscribe(response => {
       this.Collection = response;
-      this.getImage( this.Collection.imageName);
+      this.getImage(this.Collection.imageName);
       this.oldCollectionName = this.Collection.name;
     })
   }
@@ -70,6 +71,7 @@ export class CollectionEditFormComponent {
   getImage(imageName: any) {
     this.imageService.getImage(imageName).subscribe(response => {
       this.retrieveResponse = response;
+      console.log(this.retrieveResponse);
       this.base64Data = this.retrieveResponse.picByte;
       this.imagePreviewUrl = 'data:image/jpeg;base64,' + this.base64Data;
     });
@@ -95,7 +97,9 @@ export class CollectionEditFormComponent {
 
   deleteCollection() {
     this.collectionService.deleteCollection(this.Collection.id).subscribe(() => {
-      this.router.navigate(['']);
+      this.imageService.deleteImage(this.retrieveResponse.id).subscribe(() => {
+        this.router.navigate(['']);
+      });
     })
   }
 
@@ -109,7 +113,7 @@ export class CollectionEditFormComponent {
       twitter: '',
       createdAt: new Date(),
       categoryName: '',
-      username: '',
+      userHash: '',
       imageName: ''
     }
   }
@@ -135,7 +139,10 @@ export class CollectionEditFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData);
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
   }
 
+  deleteImage() {
+    this.imagePreviewUrl = null;
+  }
 }

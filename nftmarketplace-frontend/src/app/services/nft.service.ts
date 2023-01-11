@@ -7,7 +7,7 @@ import { NFT } from '../models/nft';
 })
 export class NftService {
 
-  apiUrl = "http://localhost:8083/api/nfts";
+  apiUrl = "http://localhost:9191/api/nfts";
 
   constructor(private httpClient: HttpClient) { }
 

@@ -15,19 +15,27 @@
         <module name="user-service" />
         <module name="wallet-service" />
         <module name="image-service" />
+        <module name="service-registry" />
+        <module name="cloud-gateway" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="zzzz" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="cart-service" options="-parameters" />
       <module name="category-service" options="-parameters" />
+      <module name="cloud-gateway" options="-parameters" />
       <module name="collection-service" options="-parameters" />
       <module name="image-service" options="-parameters" />
       <module name="nft-service" options="-parameters" />
+      <module name="service-registry" options="-parameters" />
       <module name="transaction-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="wallet-service" options="-parameters" />
+      <module name="zzzz" options="-parameters" />
     </option>
   </component>
 </project>

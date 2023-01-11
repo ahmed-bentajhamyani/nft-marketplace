@@ -23,6 +23,7 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
 import { FormsModule } from '@angular/forms';
 import { CollectionEditFormComponent } from './components/collection-edit-form/collection-edit-form.component';
 import { ItemEditFormComponent } from './components/item-edit-form/item-edit-form.component';
+import { ProfileEditFormComponent } from './components/profile-edit-form/profile-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ItemEditFormComponent } from './components/item-edit-form/item-edit-for
     MoreItemsCardComponent,
     ItemFormComponent,
     CollectionEditFormComponent,
-    ItemEditFormComponent
+    ItemEditFormComponent,
+    ProfileEditFormComponent
   ],
   imports: [
     BrowserModule,

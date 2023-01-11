@@ -1,5 +1,3 @@
-import { NFT } from "./nft";
-
 export interface Collection {
     id?: string;
     name: string;
@@ -10,6 +8,6 @@ export interface Collection {
     twitter: string;
     createdAt: Date;
     categoryName: string;
-    username: String;
+    userHash: String;
     imageName: String
 }
