@@ -23,9 +23,38 @@ To effectively convey the dynamic nature of our application, we created a genera
 
 ## Configuration
 
-### Services
+### Maven Project
 
 To provide all the dependencies, spring uses the ```pom.xml``` file, which allows a better management of these independences and helps to simplify the process of configuring and setting up a Spring-based application.
+
+So this is the ```pom.xml``` file of the microservice-parent:
+
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+### Services
 
 So our services uses several dependencies to function properly. The first dependency, **spring-boot-starter-data-mongodb**, allows for the integration of MongoDB as the application's database.
 
