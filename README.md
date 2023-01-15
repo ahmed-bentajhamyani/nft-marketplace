@@ -403,13 +403,256 @@ We create the image with the command ```docker build -t nftmarketplace-angular-a
 Run the image we just create as a container with the command ```docker run -d --name nftmarketplace-angular nftmarketplace-angular-app```
 
 <p align="center">
-	<img width="776" alt="Docker Angular container" src="https://user-images.githubusercontent.com/101653735/212503453-6df08148-0faa-4907-af70-d3cb3274db2d.png">
+	<img width="776" alt="4" src="https://user-images.githubusercontent.com/101653735/212503453-6df08148-0faa-4907-af70-d3cb3274db2d.png">
 </p>
 
 #### Jenkins
 
+In order to deploy our angular application in jenkins we create a **Freestyle project** and choose in general configuration a Github project and we give the url of our github project
 
+<p align="center">
+	<img width="665" alt="1" src="https://user-images.githubusercontent.com/101653735/212529481-18e27b71-208a-4842-bc99-aa7461f69128.png">
+</p>
+
+In the Source Code Management section we give our repository url and because our reposifory is private we needed to create a github deploy key for jenkins.
+
+<p align="center">
+	<img width="659" alt="2" src="https://user-images.githubusercontent.com/101653735/212529677-269fdc14-5e25-4ed7-98c2-b902fd05735e.png">
+</p>
+
+In the Build Triggers section we told jenkins to build the project everytime we push a commit.
+
+<p align="center">
+	<img width="656" alt="3" src="https://user-images.githubusercontent.com/101653735/212529742-d3a01701-9840-4624-9341-18d68af3b23b.png">
+</p>
+
+And the final configuration section is to specify the build steps.
+
+<p align="center">
+	<img width="647" alt="4" src="https://user-images.githubusercontent.com/101653735/212529782-c0270065-0112-4953-b6f1-f149bc5df77d.png">
+</p>
+
+
+Our project is built successfully.
+
+<p align="center">
+	<img width="647" alt="4" src="(https://user-images.githubusercontent.com/101653735/212529939-f115fb54-83fa-4d31-a018-6a04aa13a499.png">
+</p>
+
+This is a dashboard of the last success, failure and duration of our projects
+
+<p align="center">
+	<img width="656" alt="6" src="https://user-images.githubusercontent.com/101653735/212529915-b0fd9752-d725-4199-8dcd-acb07da7f25d.png">
+</p>
 
 ### Spring Boot Application
 
+#### Docker
 
+To create the docker image we added a ```Dockerfile``` in our cloud-gateway.
+
+```
+FROM openjdk:17
+
+COPY target/*.jar app.jar
+
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+
+Now we build our image using the command **docker build -t nftmarketplace-cloudgateway .**
+
+<p align="center">
+	<img width="924" alt="1" src="https://user-images.githubusercontent.com/101653735/212531268-ee46d4c1-c9d2-4c42-af39-45fc26d500f7.png">
+</p>
+
+One of the drawbacks we can think about this ```Dockerfile``` approach is no matter small changes we did in our API project like if we update one dependency in ```pom.xml``` this ```Dockerfile``` will build the whole image again so we will use the docker multi stage builds and we create another docker file ```Dockerfile-layered```
+
+```
+FROM eclipse-temurin:17.0.4.1_1-jre as builder
+WORKDIR extracted
+ADD target/*.jar app.jar
+RUN java -Djarmode=layertools -jar app.jar extract
+
+FROM eclipse-temurin:17.0.4.1_1-jre
+WORKDIR application
+COPY --from=builder extracted/dependencies/ ./
+COPY --from=builder extracted/spring-boot-loader/ ./
+COPY --from=builder extracted/snapshot-dependencies/ ./
+COPY --from=builder extracted/application/ ./
+EXPOSE 8080
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+```
+
+Let's build the second image using the command **docker build -t nftmarkeplace-cloudgateway-layered -f Dockerfile-layered .**
+
+<p align="center">
+	<img width="925" alt="2" src="https://user-images.githubusercontent.com/101653735/212531381-32a0d654-b9fa-4e3c-a8c3-ffa719813b18.png">
+</p>
+
+We can check if our images are built successfully with the command **docker images**
+
+<p align="center">
+	<img width="925" alt="2 " src="https://user-images.githubusercontent.com/101653735/212531414-a6f09ae8-8b3e-4913-8f77-a3c07fb2e405.png">
+</p>
+
+To create the other images we used a librairy called Jib from google which is mainly used to build containers from java application without using the docker file. We add the plugin in the ```pom.xml``` of  our microservices-parent.
+
+ ```
+<plugin>
+	<groupId>com.google.cloud.tools</groupId>
+	<artifactId>jib-maven-plugin</artifactId>
+	<version>3.2.1</version>
+	<configuration>
+	    <from>
+		<image>eclipse-temurin:17.0.4.1_1-jre</image>
+	    </from>
+	    <to>
+		<image>registry-1.docker.io/ahmedbentaj/${project.artifactId}</image>
+	    </to>
+	</configuration>
+</plugin>
+ ```
+ 
+ We used this command **mvn clean compile jib:build** to build the docker image and push it to DockerHub.
+ 
+ <p align="center">
+	<img width="920" alt="3" src="https://user-images.githubusercontent.com/101653735/212531786-b2cfd2ce-8574-4a3e-a201-ca833cd21ffa.png">
+</p>
+
+The images of our services are built successfully.
+
+<p align="center">
+	<img width="917" alt="4" src="https://user-images.githubusercontent.com/101653735/212531826-7a322b35-ebf6-4415-8d3f-a90fd3dd0794.png">
+</p>
+
+And the final step is to run all this docker containers, and to do so we will create a ```docker-compose.yml``` in the microservice-parent.
+
+```
+version: '3.7'
+services:
+  ## Mongo Docker Compose Config
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.14-rc0-focal
+    restart: always
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  ## Zipkin
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+  ## Eureka Server
+  service-registry:
+    image: ahmedbentaj/service-registry:latest
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+
+  cloud-gateway:
+    image: ahmedbentaj/cloud-geteway:latest
+    container_name: cloud-gateway
+    ports:
+      - "9191:9191"
+    expose:
+      - "9191"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - service-registry
+
+  ## category-Service Docker Compose Config
+  category-service:
+    container_name: category-service
+    image: ahmedbentaj/category-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## collecttion-Service Docker Compose Config
+  collection-service:
+    container_name: collection-service
+    image: ahmedbentaj/collection-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## nft-Service Docker Compose Config
+  nft-service:
+    container_name: nft-service
+    image: ahmedbentaj/nft-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## image-Service Docker Compose Config
+  image-service:
+    container_name: image-service
+    image: ahmedbentaj/image-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## user-Service Docker Compose Config
+  user-service:
+    container_name: user-service
+    image: ahmedbentaj/user-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## cart-Service Docker Compose Config
+  cart-service:
+    container_name: cart-service
+    image: ahmedbentaj/cart-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## transaction-Service Docker Compose Config
+  transaction-service:
+    container_name: transaction-service
+    image: ahmedbentaj/transaction-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+```
+
+And we type the command **docker compose up -d**, as you can see all our services are strated successfully.
+
+<p align="center">
+	<img width="920" alt="5" src="https://user-images.githubusercontent.com/101653735/212532025-ee4402d8-369e-407b-9852-c384b9fa9e75.png">
+</p>
