@@ -495,6 +495,28 @@ We can check if our images are built successfully with the command **docker imag
 	<img width="925" alt="2 " src="https://user-images.githubusercontent.com/101653735/212531414-a6f09ae8-8b3e-4913-8f77-a3c07fb2e405.png">
 </p>
 
+In the microservices we add ```application-docker.properties```.
+
+```
+spring.data.mongodb.host=mongo
+spring.data.mongodb.port=27017
+spring.data.mongodb.database= nftmarketplace
+
+server.port=9191
+spring.zipkin.base-url=http://zipkin:9411
+
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+eureka.client.serviceUrl.defaultZone=http://service-registry:8761/eureka
+```
+
+Because the service-registry doesn't have a database we add the following ```application-docker.properties```.
+
+```
+server.port=9191
+spring.zipkin.base-url=http://zipkin:9411
+```
+
 To create the other images we used a librairy called Jib from google which is mainly used to build containers from java application without using the docker file. We add the plugin in the ```pom.xml``` of  our microservices-parent.
 
  ```
