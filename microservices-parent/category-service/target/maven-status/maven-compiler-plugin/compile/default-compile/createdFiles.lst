@@ -1,0 +1,5 @@
+ma\fstt\service\CategoryService.class
+ma\fstt\model\Category.class
+ma\fstt\repository\CategoryRepository.class
+ma\fstt\controller\CategoryController.class
+ma\fstt\CategoryServiceApplication.class

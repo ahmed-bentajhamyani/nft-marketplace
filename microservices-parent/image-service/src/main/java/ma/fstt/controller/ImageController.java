@@ -26,8 +26,8 @@ public class ImageController {
         return imageService.getImage(name);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteImage(@PathVariable String id) {
-        imageService.deleteImage(id);
+    @DeleteMapping("/{imageName}")
+    public void deleteImage(@PathVariable String imageName) {
+        imageService.deleteImage(imageName);
     }
 }

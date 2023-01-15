@@ -5,6 +5,7 @@ import { NFT } from 'src/app/models/nft';
 import { CollectionService } from 'src/app/services/collection.service';
 import { ImageService } from 'src/app/services/image.service';
 import { NftService } from 'src/app/services/nft.service';
+import abiInterface from '../../../../artifacts/contracts/NFTMarketplace.sol/NFTMarketplace.json';
 
 @Component({
   selector: 'app-item-form',
@@ -18,7 +19,8 @@ export class ItemFormComponent {
     name: '',
     price: 0,
     collectionName: '',
-    imageName: ''
+    imageName: '',
+    token: ''
   }
 
   selectedFile: any;
@@ -40,12 +42,21 @@ export class ItemFormComponent {
     })
   }
 
-  persistNft() {
+  persistNft = async () => {
+    const ethers = require("ethers");
+    const adress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+    const provider = await new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const mycontract = new ethers.Contract(adress, abiInterface.abi, signer);
+    const v2 = await mycontract.addItem(await signer.getAddress())
+    await v2.wait();
+    const v = await mycontract.getId();
+    this.Nft.token = v._hex;
+    console.log('hey')
     this.nftService.persistNft(this.Nft).subscribe(() => {
+      console.log(this.Nft)
       this.onUpload();
-      this.router.navigate(['item', this.Nft.name]);
-      this.resetNft();
-    })
+    });
   }
 
   resetNft() {
@@ -53,7 +64,8 @@ export class ItemFormComponent {
       name: '',
       price: 0,
       collectionName: '',
-      imageName: ''
+      imageName: '',
+      token: ''
     }
   }
 
@@ -78,11 +90,13 @@ export class ItemFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {
+      this.router.navigate(['item', this.Nft.name]);
+      this.resetNft();
+    });
   }
 
   deleteImage() {
     this.imagePreviewUrl = null;
   }
-
 }

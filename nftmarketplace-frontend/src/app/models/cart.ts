@@ -1,8 +1,6 @@
 export interface Cart {
     id?: string;
-    quantity: number;
-    totalPrice: number;
-    collectionName: string;
+    itemPrice: number;
     nftName: String;
-    username: String
+    walletAddress: String;
 }

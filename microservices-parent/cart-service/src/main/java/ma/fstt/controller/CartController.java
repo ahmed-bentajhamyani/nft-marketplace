@@ -1,12 +1,11 @@
 package ma.fstt.controller;
 
 import ma.fstt.model.Cart;
-import ma.fstt.repository.CartRepository;
+import ma.fstt.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/cart")
@@ -14,37 +13,30 @@ import java.util.Optional;
 public class CartController {
 
     @Autowired
-    private CartRepository repository;
+    private CartService cartService;
 
-    @GetMapping
-    public List<Cart> getCart() {
-        return repository.findAll();
+    @GetMapping("/{walletAddress}")
+    public List<Cart> getUserCarts(@PathVariable String walletAddress) {
+        return cartService.getUserCarts(walletAddress);
     }
 
     @PostMapping
-    public Cart saveCart(Cart cart) {
-        return repository.save(cart);
+    public void saveCart(@RequestBody Cart cart) {
+        cartService.createCart(cart);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCart(@PathVariable String id) {
-        repository.deleteById(id);
+        cartService.deleteCart(id);
     }
 
-    @GetMapping("/{id}")
-    public Optional<Cart> getOneCart(@PathVariable String id) {
-        return repository.findById(id);
+    @DeleteMapping("/clear/{walletAddress}")
+    public void deleteAllCartsByWalletAddress(@PathVariable String walletAddress) {
+        cartService.deleteAllCartsByWalletAddress(walletAddress);
     }
 
     @PutMapping("/{id}")
-    public Cart updateCart(@RequestBody Cart cart, @PathVariable String id) {
-        return repository.findById(id).map(x -> {
-            x.setQuantity(cart.getQuantity());
-            x.setTotalPrice(cart.getTotalPrice());
-            return repository.save(x);
-        }).orElseGet(() -> {
-            cart.setId(id);
-            return repository.save(cart);
-        });
+    public void updateCart(@RequestBody Cart cart, @PathVariable String id) {
+        cartService.updateCart(id, cart);
     }
 }

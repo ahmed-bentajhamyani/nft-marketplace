@@ -68,7 +68,7 @@
                     class="flex items-center text-sm font-semibold py-3.5 px-4 border-b hover:bg-gray-100 rounded-t-lg cursor-pointer"><fa-icon
                         [icon]="faUser" class="mr-4" size="lg"></fa-icon> Profile</a>
                 <!-- Autheticated -->
-                <a *ngIf="isActive" [routerLink]="['/account', user.hash]"
+                <a *ngIf="isActive" [routerLink]="['/account', user.walletAddress]"
                     class="flex items-center text-sm font-semibold py-3.5 px-4 border-b hover:bg-gray-100 rounded-t-lg"><fa-icon
                         [icon]="faUser" class="mr-4" size="lg"></fa-icon> Profile</a>
             </li>
@@ -98,4 +98,4 @@
 
 <app-auth-modal></app-auth-modal>
 
-<app-cart-modal [isActive]="isActive"></app-cart-modal>
+<app-cart-modal [user]="user" [carts]="carts" [nfts]="nfts" [retrievedImages]="retrievedImages" [totalItems]="totalItems" [totalPrice]="totalPrice"></app-cart-modal>

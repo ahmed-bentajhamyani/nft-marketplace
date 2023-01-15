@@ -20,7 +20,7 @@ export class ImageService {
     return this.httpClient.get(`${this.apiUrl}/${imageName}`);
   }
 
-  deleteImage(id: any) {
-    return this.httpClient.delete(`${this.apiUrl}/${id}`);
+  deleteImage(imageName: any) {
+    return this.httpClient.delete(`${this.apiUrl}/${imageName}`);
   }
 }

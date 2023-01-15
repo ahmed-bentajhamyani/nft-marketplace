@@ -24,7 +24,7 @@ export class CollectionEditFormComponent {
     twitter: '',
     createdAt: new Date(),
     categoryName: '',
-    userHash: '',
+    walletAddress: '',
     imageName: ''
   }
 
@@ -79,10 +79,8 @@ export class CollectionEditFormComponent {
 
   updateCollection() {
     this.collectionService.updateCollection(this.Collection).subscribe(() => {
-      this.onUpload();
       this.updateNftCollectionName(this.Collection.name);
-      this.router.navigate(['collection', this.Collection.name]);
-      this.resetCollection();
+      this.onUpload();
     })
   }
 
@@ -90,12 +88,15 @@ export class CollectionEditFormComponent {
     this.nftService.getNftsByCollectionName(this.oldCollectionName).subscribe((response) => {
       response.map((nft) => {
         nft.collectionName = collectionName;
-        this.nftService.updateNft(nft).subscribe(() => { })
+        this.nftService.updateNft(nft).subscribe(() => {
+          this.resetCollection();
+        });
       })
     })
   }
 
   deleteCollection() {
+    
     this.collectionService.deleteCollection(this.Collection.id).subscribe(() => {
       this.imageService.deleteImage(this.retrieveResponse.id).subscribe(() => {
         this.router.navigate(['']);
@@ -113,7 +114,7 @@ export class CollectionEditFormComponent {
       twitter: '',
       createdAt: new Date(),
       categoryName: '',
-      userHash: '',
+      walletAddress: '',
       imageName: ''
     }
   }
@@ -139,7 +140,9 @@ export class CollectionEditFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {
+      this.router.navigate(['collection', this.Collection.name]);
+    });
   }
 
   deleteImage() {

@@ -5,10 +5,12 @@
     <file url="file://$PROJECT_DIR$/category-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/category-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/collection-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/collection-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/image-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/nft-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/nft-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-registry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />

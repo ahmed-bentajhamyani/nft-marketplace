@@ -21,12 +21,12 @@ public class CollectionService {
         return collectionRepository.findCollectionByName(name);
     }
 
-    public List<Collection> getCollectionsByUserHash(String userHash) {
-        return collectionRepository.findCollectionsByUserHash(userHash);
+    public List<Collection> getCollectionsByWalletAddress(String walletAddress) {
+        return collectionRepository.findCollectionsByWalletAddress(walletAddress);
     }
 
     public void createCollection(Collection col) {
-        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), LocalDate.now(), col.getCategoryName(), col.getUserHash(), col.getImageName());
+        Collection collection = new Collection(col.getName(), col.getDescription(), col.getItems(), col.getWebsite(), col.getDiscord(), col.getTwitter(), LocalDate.now(), col.getCategoryName(), col.getWalletAddress(), col.getImageName());
         collectionRepository.insert(collection);
     }
 
@@ -40,7 +40,7 @@ public class CollectionService {
                     collection.setDiscord(col.getDiscord());
                     collection.setTwitter(col.getTwitter());
                     collection.setCategoryName(col.getCategoryName());
-                    collection.setUserHash(col.getUserHash());
+                    collection.setWalletAddress(col.getWalletAddress());
                     collection.setImageName(col.getImageName());
                     return collectionRepository.save(collection);
                 })

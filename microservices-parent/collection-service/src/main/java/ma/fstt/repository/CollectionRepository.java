@@ -10,6 +10,6 @@ public interface CollectionRepository extends MongoRepository<Collection, String
     @Query("{name:'?0'}")
     Collection findCollectionByName(String name);
 
-    @Query("{userHash:'?0'}")
-    List<Collection> findCollectionsByUserHash(String userHash);
+    @Query("{walletAddress:'?0'}")
+    List<Collection> findCollectionsByWalletAddress(String walletAddress);
 }

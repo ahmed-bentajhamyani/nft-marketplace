@@ -25,10 +25,10 @@ public class Collection {
     private String twitter;
     private LocalDate createdAt;
     private String categoryName;
-    private String userHash;
+    private String walletAddress;
     private String imageName;
 
-    public Collection(String name, String description, int items, String website, String discord, String twitter, LocalDate createdAt, String categoryName, String userHash, String imageName) {
+    public Collection(String name, String description, int items, String website, String discord, String twitter, LocalDate createdAt, String categoryName, String walletAddress, String imageName) {
         this.name = name;
         this.description = description;
         this.items = items;
@@ -37,7 +37,7 @@ public class Collection {
         this.twitter = twitter;
         this.createdAt = createdAt;
         this.categoryName = categoryName;
-        this.userHash = userHash;
+        this.walletAddress = walletAddress;
         this.imageName = imageName;
     }
 }

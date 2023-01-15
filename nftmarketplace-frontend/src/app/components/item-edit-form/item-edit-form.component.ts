@@ -18,7 +18,8 @@ export class ItemEditFormComponent {
     name: '',
     price: 0,
     collectionName: '',
-    imageName: ''
+    imageName: '',
+    token: ''
   }
 
   selectedFile: any;
@@ -26,7 +27,7 @@ export class ItemEditFormComponent {
   retrieveResponse: any;
   base64Data: any;
   retrievedImage: any;
-  
+
   imagePreviewUrl: any;
 
   // Icons
@@ -69,8 +70,6 @@ export class ItemEditFormComponent {
   updateNft() {
     this.nftService.updateNft(this.Nft).subscribe(() => {
       this.onUpload();
-      this.router.navigate(['item', this.Nft.name]);
-      this.resetNft();
     })
   }
 
@@ -85,7 +84,8 @@ export class ItemEditFormComponent {
       name: '',
       price: 0,
       collectionName: '',
-      imageName: ''
+      imageName: '',
+      token: ''
     }
   }
 
@@ -110,7 +110,10 @@ export class ItemEditFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData).subscribe(() => {});
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {
+      this.router.navigate(['item', this.Nft.name]);
+      this.resetNft();
+    });
   }
 
   deleteImage() {

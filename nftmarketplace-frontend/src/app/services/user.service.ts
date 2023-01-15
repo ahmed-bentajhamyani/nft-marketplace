@@ -15,8 +15,8 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.apiUrl}`);
   }
 
-  getUserByHash(hash: any) {
-    return this.httpClient.get<User>(`${this.apiUrl}/${hash}`);
+  getUserByWalletAddress(walletAddress: any) {
+    return this.httpClient.get<User>(`${this.apiUrl}/${walletAddress}`);
   }
 
   deleteUser(id: any) {

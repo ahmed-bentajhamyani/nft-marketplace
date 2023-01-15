@@ -1,0 +1,6 @@
+ma\fstt\model\DatabaseSequence.class
+ma\fstt\model\Transaction.class
+ma\fstt\service\TransactionService.class
+ma\fstt\controller\TransactionController.class
+ma\fstt\TransactionServiceApplication.class
+ma\fstt\repository\TransactionRepository.class

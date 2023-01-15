@@ -12,13 +12,13 @@ import { UserService } from 'src/app/services/user.service';
 export class AuthModalComponent {
   users: any;
   user: any;
-  hash: any;
+  walletAddress: any;
 
   User: User = {
     username: 'Unnamed',
     email: 'unnamed@gmail.com',
     profilePicture: '',
-    hash: '',
+    walletAddress: '',
     joinedAt: new Date()
   }
 
@@ -29,7 +29,7 @@ export class AuthModalComponent {
 
   connectWallet = async () => {
     if (typeof window.ethereum !== 'undefined') {
-      this.hash = await window.ethereum.request({ method: "eth_requestAccounts" });
+      this.walletAddress = await window.ethereum.request({ method: "eth_requestAccounts" });
       this.authenticate();
     } else {
       console.log("please install metamask wallet extension in your browser")
@@ -41,7 +41,7 @@ export class AuthModalComponent {
     this.userService.getUsers().subscribe((response) => {
       this.users = response;
       for (let user of this.users) {
-        if (user.hash == this.hash) {
+        if (user.walletAddress == this.walletAddress) {
           sessionStorage.setItem('user', JSON.stringify(user));
           userFound = true;
         }
@@ -50,7 +50,7 @@ export class AuthModalComponent {
         }
       }
       if (!userFound) {
-        this.User.hash = this.hash[0];
+        this.User.walletAddress = this.walletAddress[0];
         this.persistUser();
       }
     })
@@ -58,13 +58,13 @@ export class AuthModalComponent {
 
   persistUser() {
     this.userService.persistUser(this.User).subscribe(() => {
-      this.getUserByHash();
+      this.getUserByWalletAddress();
       this.resetUser();
     });
   }
 
-  getUserByHash() {
-    this.userService.getUserByHash(this.User.hash).subscribe(response => {
+  getUserByWalletAddress() {
+    this.userService.getUserByWalletAddress(this.User.walletAddress).subscribe(response => {
       this.user = response;
       sessionStorage.setItem('user', JSON.stringify(this.user));
       this.router.navigate(['/account', this.User.id]);
@@ -77,7 +77,7 @@ export class AuthModalComponent {
       username: 'Unnamed',
       email: 'unnamed@gmail.com',
       profilePicture: '',
-      hash: '',
+      walletAddress: '',
       joinedAt: new Date()
     }
   }

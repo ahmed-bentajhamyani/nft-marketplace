@@ -8,6 +8,6 @@ export interface Collection {
     twitter: string;
     createdAt: Date;
     categoryName: string;
-    userHash: String;
+    walletAddress: String;
     imageName: String
 }

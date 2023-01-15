@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 import { Collection } from 'src/app/models/collection';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-item-description-card',
@@ -12,5 +13,8 @@ export class ItemDescriptionCardComponent {
 
   @Input()
   collection!: Collection;
+
+  @Input()
+  owner!: User;
   
 }

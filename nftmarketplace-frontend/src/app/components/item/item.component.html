@@ -1,7 +1,10 @@
-<div class="flex justify-end items-end border-b mb-5">
-    <a [routerLink]="['/edit/item', nft.name]"
-        class="font-bold text-lg mb-3 px-16 py-4 text-center rounded-lg text-blue-500 bg-white border-2 hover:shadow focus:outline-none focus:ring-blue-300">Edit</a>
-</div>
+<ng-container *ngIf="user != null">
+    <div *ngIf="owner.id == user.id" class="flex justify-end items-end border-b mb-5">
+        <a [routerLink]="['/edit/item', nft.name]"
+            class="font-bold text-lg mb-3 px-16 py-4 text-center rounded-lg text-blue-500 bg-white border-2 hover:shadow focus:outline-none focus:ring-blue-300">Edit</a>
+    </div>
+</ng-container>
+
 <div class="grid grid-cols-2">
     <img *ngIf="retrievedImages[nft.name] != null" class="rounded-xl" [src]="retrievedImages[nft.name]" alt=""
         width="500px" />
@@ -28,13 +31,14 @@
             </div>
         </div>
         <p class='font-bold text-4xl mb-2'>{{nft.name}}</p>
-        <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a [routerLink]="['/account', user.hash]" class="text-blue-500">
-                {{user.username}}</a></p>
+        <p class='text-base text-gray-600 mr-5 mb-2'>Owned by<a [routerLink]="['/account', owner.walletAddress]"
+                class="text-blue-500">
+                {{owner.username}}</a></p>
 
         <!-- Price and Add to cart Card -->
-        <app-price-card [nft]="nft"></app-price-card>
+        <app-price-card [nft]="nft" [user]="user"></app-price-card>
 
-        <app-item-description-card [collection]="collection"></app-item-description-card>
+        <app-item-description-card [collection]="collection" [owner]="owner"></app-item-description-card>
     </div>
 
 
@@ -55,6 +59,6 @@
     </div>
 </div>
 
-<ng-container *ngIf="nfts != null">
+<ng-container *ngIf="nfts.length != 0">
     <app-more-items-card [nfts]="nfts" [retrievedImages]="retrievedImages"></app-more-items-card>
 </ng-container>

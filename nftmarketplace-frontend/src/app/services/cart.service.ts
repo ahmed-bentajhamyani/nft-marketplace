@@ -11,19 +11,24 @@ export class CartService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCarts() {
-    return this.httpClient.get<Cart[]>(`${this.apiUrl}`);
+  getUserCarts(walletAdress: any) {
+    return this.httpClient.get<Cart[]>(`${this.apiUrl}/${walletAdress}`);
   }
 
   getCartByName(name: any) {
     return this.httpClient.get<Cart>(`${this.apiUrl}/${name}`);
   }
 
-  deleteCart(id: any) {
+  removeItemFromCart(id: any) {
     return this.httpClient.delete(`${this.apiUrl}/${id}`);
   }
 
+  clearCart(walletAdress: any) {
+    return this.httpClient.delete(`${this.apiUrl}/clear/${walletAdress}`);
+  }
+
   persistCart(data: any) {
+    console.log(data);
     return this.httpClient.post(`${this.apiUrl}`, data);
   }
 

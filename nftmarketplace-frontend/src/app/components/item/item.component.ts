@@ -16,6 +16,7 @@ export class ItemComponent {
   nft: any;
   nfts: any;
   collection: any;
+  owner: any;
   user: any;
 
   retrieveResponse: any;
@@ -37,7 +38,11 @@ export class ItemComponent {
       if (params['name']) {
         this.getNftByName(params['name']);
       }
-    })
+    });
+    if (sessionStorage.getItem('user')) {
+      this.user = sessionStorage.getItem('user');
+      this.user = JSON.parse(this.user);
+    }
   }
 
   getNftByName(name: any) {
@@ -46,7 +51,7 @@ export class ItemComponent {
       this.getImage(this.nft);
       this.collectionService.getCollectionByName(this.nft.collectionName).subscribe(collection => {
         this.collection = collection;
-        this.getUserByHash();
+        this.getOwnerByWalletAddress();
         this.getNftsByName(this.nft.collectionName);
       })
     })
@@ -70,10 +75,9 @@ export class ItemComponent {
     });
   }
 
-  getUserByHash() {
-    this.userService.getUserByHash(this.collection.userHash).subscribe(response => {
-      this.user = response;
-      console.log(this.user);
+  getOwnerByWalletAddress() {
+    this.userService.getUserByWalletAddress(this.collection.walletAddress).subscribe(response => {
+      this.owner = response;
     })
   }
 

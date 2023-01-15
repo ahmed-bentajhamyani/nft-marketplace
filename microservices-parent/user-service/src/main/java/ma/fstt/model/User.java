@@ -18,15 +18,15 @@ public class User {
     private String username;
     private String email;
     private String profilePicture;
-    private String hash;
+    private String walletAddress;
     private LocalDate joinedAt;
 
-    public User(String username, String email, String profilePicture, String hash, LocalDate joinedAt) {
+    public User(String username, String email, String profilePicture, String walletAddress, LocalDate joinedAt) {
         super();
         this.username = username;
         this.email = email;
         this.profilePicture = profilePicture;
         this.joinedAt = joinedAt;
-        this.hash = hash;
+        this.walletAddress = walletAddress;
     }
 }

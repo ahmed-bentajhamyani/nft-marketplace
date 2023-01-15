@@ -17,12 +17,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Transaction {
     @Id
     private String id;
-    private String amount;
+    private float amount;
     private Date date;
     private String type;
     private String hash;
 
-    public Transaction(String amount, Date date, String type, String hash) {
+    public Transaction(float amount, Date date, String type, String hash) {
         super();
         this.amount = amount;
         this.date = date;

@@ -1,4 +1,4 @@
-package ma.fstt.demo;
+package ma.fstt.cloudgateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

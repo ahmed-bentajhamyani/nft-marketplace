@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: API-GATEWAY
+    name: CLOUD-GATEWAY
   cloud:
     gateway:
       default-filters:
@@ -31,10 +31,6 @@ spring:
           uri: lb://USER-SERVICE
           predicates:
             - Path=/api/users/**
-        - id: WALLET-SERVICE
-          uri: lb://WALLET-SERVICE
-          predicates:
-            - Path=/api/wallets/**
         - id: CATEGORY-SERVICE
           uri: lb://CATEGORY-SERVICE
           predicates:

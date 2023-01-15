@@ -1,0 +1,5 @@
+ma\fstt\controller\UserController.class
+ma\fstt\repository\UserRepository.class
+ma\fstt\UserServiceApplication.class
+ma\fstt\model\User.class
+ma\fstt\service\UserService.class

@@ -3,5 +3,6 @@ export interface NFT {
     name: string;
     price: number;
     collectionName: string;
-    imageName: String
+    imageName: String,
+    token: string
 }

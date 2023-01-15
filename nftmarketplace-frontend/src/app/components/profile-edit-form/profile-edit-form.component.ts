@@ -13,12 +13,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ProfileEditFormComponent {
   collections: any;
+  previousImage: any;
 
   User: User = {
     username: 'Unnamed',
     email: 'unnamed@gmail.com',
     profilePicture: '',
-    hash: '',
+    walletAddress: '',
     joinedAt: new Date()
   }
 
@@ -34,26 +35,20 @@ export class ProfileEditFormComponent {
   faCloudArrowUp = faCloudArrowUp;
   faClose = faClose;
 
-  constructor(private route: ActivatedRoute, private router: Router, private collectionService: CollectionService, private UserService: UserService, private imageService: ImageService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private collectionService: CollectionService, private userService: UserService, private imageService: ImageService) { }
 
   ngOnInit(): void {
-    this.getCollections();
     this.route.params.subscribe(params => {
-      if (params['name']) {
-        this.getUserByHash(params['name']);
+      if (params['walletAddress']) {
+        this.getUserByWalletAddress(params['walletAddress']);
       }
     })
   }
 
-  getCollections() {
-    this.collectionService.getCollections().subscribe((response) => {
-      this.collections = response;
-    })
-  }
-
-  getUserByHash(name: any) {
-    this.UserService.getUserByHash(name).subscribe((response: any) => {
+  getUserByWalletAddress(walletAddress: any) {
+    this.userService.getUserByWalletAddress(walletAddress).subscribe(response => {
       this.User = response;
+      this.previousImage = this.User.profilePicture;
       this.getImage(this.User.profilePicture);
     })
   }
@@ -61,22 +56,21 @@ export class ProfileEditFormComponent {
   getImage(profilPicture: any) {
     this.imageService.getImage(profilPicture).subscribe(response => {
       this.retrieveResponse = response;
-      console.log(this.retrieveResponse);
       this.base64Data = this.retrieveResponse.picByte;
       this.imagePreviewUrl = 'data:image/jpeg;base64,' + this.base64Data;
     });
   }
 
   updateUser() {
-    this.UserService.updateUser(this.User).subscribe(() => {
+    this.userService.updateUser(this.User).subscribe(() => {
       this.onUpload();
-      this.router.navigate(['user', this.User.id]);
+      this.router.navigate(['account', this.User.walletAddress]);
       this.resetUser();
     })
   }
 
   deleteUser() {
-    this.UserService.deleteUser(this.User.id).subscribe(() => {
+    this.userService.deleteUser(this.User.id).subscribe(() => {
       this.router.navigate(['']);
     })
   }
@@ -86,7 +80,7 @@ export class ProfileEditFormComponent {
       username: 'Unnamed',
       email: 'unnamed@gmail.com',
       profilePicture: '',
-      hash: '',
+      walletAddress: '',
       joinedAt: new Date()
     }
   }
@@ -109,13 +103,15 @@ export class ProfileEditFormComponent {
   }
 
   onUpload() {
-    const uploadImageData = new FormData();
-    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    if (this.User.profilePicture != null) {
+      const uploadImageData = new FormData();
+      uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData).subscribe(() => { });
+      this.imageService.uploadImage(uploadImageData).subscribe(() => { });
+    }
   }
 
-  deleteImage() {
+  deletePreviewImage() {
     this.imagePreviewUrl = null;
   }
 }

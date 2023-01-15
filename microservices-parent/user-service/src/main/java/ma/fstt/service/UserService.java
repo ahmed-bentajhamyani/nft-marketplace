@@ -15,7 +15,7 @@ public class UserService {
     UserRepository userRepository;
 
     public void save(User user) {
-        User newUser = new User(user.getUsername(), user.getEmail(), user.getProfilePicture(), user.getHash(), LocalDate.now());
+        User newUser = new User(user.getUsername(), user.getEmail(), user.getProfilePicture(), user.getWalletAddress(), LocalDate.now());
         userRepository.insert(newUser);
     }
 
@@ -25,24 +25,20 @@ public class UserService {
 
     public void update(String id, User user) {
         userRepository.findById(id).map(u -> {
-                    u.setUsername(user.getUsername());
-                    u.setEmail(user.getEmail());
-                    u.setProfilePicture(user.getProfilePicture());
-                    u.setHash(user.getHash());
-                    return userRepository.save(u);
-                })
-                .orElseGet(() -> {
-                    user.setId(id);
-                    return userRepository.save(user);
-                });
+            u.setUsername(user.getUsername());
+            u.setEmail(user.getEmail());
+            u.setProfilePicture(user.getProfilePicture());
+            u.setWalletAddress(user.getWalletAddress());
+            return userRepository.save(u);
+        });
     }
 
     public void delete(String id) {
         userRepository.deleteById(id);
     }
 
-    public User getUserByHash(String hash) {
-        return userRepository.findUserByHash(hash);
+    public User getUserByWalletAddress(String walletAddress) {
+        return userRepository.findUserByWalletAddress(walletAddress);
     }
 
 }

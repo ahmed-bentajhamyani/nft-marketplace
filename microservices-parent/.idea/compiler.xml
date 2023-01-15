@@ -13,13 +13,13 @@
         <module name="transaction-service" />
         <module name="collection-service" />
         <module name="user-service" />
-        <module name="wallet-service" />
         <module name="image-service" />
         <module name="service-registry" />
         <module name="cloud-gateway" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="wallet-service" target="17" />
       <module name="zzzz" target="17" />
     </bytecodeTargetLevel>
   </component>

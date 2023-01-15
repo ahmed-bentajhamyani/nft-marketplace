@@ -19,8 +19,8 @@ export class CollectionService {
     return this.httpClient.get<Collection>(`${this.apiUrl}/${name}`);
   }
 
-  getCollectionsByUserHash(userHash: any) {
-    return this.httpClient.get<Collection[]>(`${this.apiUrl}/user/${userHash}`);
+  getCollectionsByWalletAddress(walletAddress: any) {
+    return this.httpClient.get<Collection[]>(`${this.apiUrl}/user/${walletAddress}`);
   }
 
   deleteCollection(id: any) {

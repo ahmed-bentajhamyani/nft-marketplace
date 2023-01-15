@@ -1,0 +1,122 @@
+---
+version: '3.7'
+services:
+  ## Mongo Docker Compose Config
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.14-rc0-focal
+    restart: always
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ./mongo-data:/data/db
+
+  ## Zipkin
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+
+  ## Eureka Server
+  service-registry:
+    image: ahmedbentaj/service-registry:latest
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+
+  cloud-gateway:
+    image: ahmedbentaj/cloud-geteway:latest
+    container_name: cloud-gateway
+    ports:
+      - "9191:9191"
+    expose:
+      - "9191"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - zipkin
+      - service-registry
+
+  ## category-Service Docker Compose Config
+  category-service:
+    container_name: category-service
+    image: ahmedbentaj/category-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## collecttion-Service Docker Compose Config
+  collection-service:
+    container_name: collection-service
+    image: ahmedbentaj/collection-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## nft-Service Docker Compose Config
+  nft-service:
+    container_name: nft-service
+    image: ahmedbentaj/nft-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## image-Service Docker Compose Config
+  image-service:
+    container_name: image-service
+    image: ahmedbentaj/image-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## user-Service Docker Compose Config
+  user-service:
+    container_name: user-service
+    image: ahmedbentaj/user-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## cart-Service Docker Compose Config
+  cart-service:
+    container_name: cart-service
+    image: ahmedbentaj/cart-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway
+
+  ## transaction-Service Docker Compose Config
+  transaction-service:
+    container_name: transaction-service
+    image: ahmedbentaj/transaction-service:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - service-registry
+      - cloud-gateway

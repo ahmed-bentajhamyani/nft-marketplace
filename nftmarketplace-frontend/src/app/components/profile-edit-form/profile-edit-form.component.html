@@ -1,0 +1,58 @@
+<div class="font-bold mt-4 px-80">
+    <div class='mb-4'>
+        <h1 class='text-4xl'>Update Your Profile</h1>
+    </div>
+    <div class="mb-10">
+        <div class="mb-6">
+            <label class="block text-base text-gray-700" for="user_avatar">Profile Picture</label>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="user_avatar_help">File types supported: JPG,
+                PNG, GIF, SVG, MP4, WEBM, MP3, WAV, OGG, GLB, GLTF. Max size: 100 MB</div>
+
+            <div class="flex items-center justify-center font-normal w-full">
+                <ng-container *ngIf="imagePreviewUrl == null">
+                    <label for="dropzone-file"
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <fa-icon [icon]="faCloudArrowUp" class="mr-4 text-gray-500" size="2x"></fa-icon>
+                            <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click
+                                    to
+                                    upload</span> or drag and drop</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (Max size: 100
+                                MB)
+                            </p>
+                        </div><input id="dropzone-file" type="file" class="hidden" (change)="onFileChanged($event)" />
+                    </label>
+                </ng-container>
+                <ng-container *ngIf="imagePreviewUrl != null">
+                    <label for="dropzone-file"
+                        class="relative flex flex-col items-center justify-center w-full h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                        <img class="rounded-lg w-full aspect-square" [src]="imagePreviewUrl" alt="" />
+                        <p (click)="deletePreviewImage()" class="absolute top-0 right-0 p-3"><fa-icon [icon]="faClose" class="text-gray-300" size="1x"></fa-icon></p>
+                        <input id="dropzone-file" type="file" class="hidden" (change)="onFileChanged($event)" />
+                    </label>
+                </ng-container>
+            </div>
+        </div>
+        <div class="mb-6">
+            <label for="username" class="block mb-2.5 text-base text-gray-700">Username</label>
+            <input type="text" id="username" name="username" [(ngModel)]="User.username"
+                class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                placeholder="Username" required>
+        </div>
+        <div class="mb-6">
+            <label for="email" class="block text-base text-gray-700">email</label>
+            <div class="font-medium text-xs text-gray-500 mb-2.5" id="email_help">We will never share your email</div>
+            <input type="email" id="email" name="email" [(ngModel)]="User.email"
+                class="bg-gray-50 font-normal border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3"
+                placeholder="yourname@gmail.com" required>
+        </div>
+        <div class="flex justify-between">
+            <button (click)="updateUser()"
+                class="text-white text-base w-full sm:w-auto px-5 py-3.5 text-center rounded-lg bg-blue-500 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300">Submit
+                changes</button>
+            <button (click)="deleteUser()"
+                class="text-blue-500 text-base w-full sm:w-auto px-5 py-3.5 text-center rounded-lg border-2 bg-white hover:shadow focus:ring-4 focus:outline-none focus:ring-blue-300">Delete
+                Account</button>
+        </div>
+    </div>
+</div>

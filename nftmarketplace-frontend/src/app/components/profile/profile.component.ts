@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent {
   collections: any;
   nfts: { [key: string]: any } = { "": "" };
+  owner: any;
   user: any;
 
   retrieveResponse: any;
@@ -34,19 +35,23 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if (params['hash']) {
-        this.getUserByHash(params['hash']);
+      if (params['walletAddress']) {
+        this.getOwnerByWalletAddress(params['walletAddress']);
       }
-    })
+    });
+    if (sessionStorage.getItem('user')) {
+      this.user = sessionStorage.getItem('user');
+      this.user = JSON.parse(this.user);
+    }
   }
 
-  getUserByHash(hash: any) {
-    this.userService.getUserByHash(hash).subscribe(response => {
-      this.user = response;
-      if (this.user.profilePicture != '') {
-        this.getProfilePicture(this.user.profilePicture);
+  getOwnerByWalletAddress(walletAddress: any) {
+    this.userService.getUserByWalletAddress(walletAddress).subscribe(response => {
+      this.owner = response;
+      if (this.owner.profilePicture != '') {
+        this.getProfilePicture(this.owner.profilePicture);
       }
-      this.getCollectionsByUserHash();
+      this.getCollectionsByUserwalletAddress();
     });
   }
 
@@ -58,8 +63,8 @@ export class ProfileComponent {
     });
   }
 
-  getCollectionsByUserHash() {
-    this.collectionService.getCollectionsByUserHash(this.user.hash).subscribe(reponse => {
+  getCollectionsByUserwalletAddress() {
+    this.collectionService.getCollectionsByWalletAddress(this.owner.walletAddress).subscribe(reponse => {
       this.collections = reponse;
       for (let collection of this.collections) {
         this.getNftsByCollectionName(collection.name);

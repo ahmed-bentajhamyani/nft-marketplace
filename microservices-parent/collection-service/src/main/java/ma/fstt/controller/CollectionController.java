@@ -24,9 +24,9 @@ public class CollectionController {
         return collectionService.getCollectionByName(name);
     }
 
-    @GetMapping("/user/{userHash}")
-    public List<Collection> getCollectionsByUsername(@PathVariable String userHash) {
-        return collectionService.getCollectionsByUserHash(userHash);
+    @GetMapping("/user/{walletAddress}")
+    public List<Collection> getCollectionsByWalletAddress(@PathVariable String walletAddress) {
+        return collectionService.getCollectionsByWalletAddress(walletAddress);
     }
 
     @PostMapping

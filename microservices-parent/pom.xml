@@ -18,14 +18,13 @@
     <modules>
         <module>category-service</module>
         <module>collection-service</module>
-        <module>cart-service</module>
         <module>transaction-service</module>
         <module>user-service</module>
-        <module>wallet-service</module>
-        <module>nft-service</module>
         <module>image-service</module>
         <module>service-registry</module>
         <module>cloud-gateway</module>
+        <module>cart-service</module>
+        <module>nft-service</module>
     </modules>
 
     <properties>
@@ -46,5 +45,23 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17.0.4.1_1-jre</image>
+                    </from>
+                    <to>
+                        <image>registry-1.docker.io/ahmedbentaj/${project.artifactId}</image>
+                    </to>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

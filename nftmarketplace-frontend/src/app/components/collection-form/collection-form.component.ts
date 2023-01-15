@@ -25,7 +25,7 @@ export class CollectionFormComponent {
     twitter: '',
     createdAt: new Date(),
     categoryName: '',
-    userHash: '',
+    walletAddress: '',
     imageName: ''
   }
 
@@ -58,11 +58,9 @@ export class CollectionFormComponent {
   persistCollection() {
     this.user = sessionStorage.getItem('user');
     this.user = JSON.parse(this.user);
-    this.Collection.userHash = this.user.hash;
+    this.Collection.walletAddress = this.user.walletAddress;
     this.collectionService.persistCollection(this.Collection).subscribe(() => {
       this.onUpload();
-      this.router.navigate(['/collection', this.Collection.name]);
-      this.resetCollection();
     })
   }
 
@@ -76,7 +74,7 @@ export class CollectionFormComponent {
       twitter: '',
       createdAt: new Date(),
       categoryName: '',
-      userHash: '',
+      walletAddress: '',
       imageName: ''
     }
   }
@@ -102,7 +100,10 @@ export class CollectionFormComponent {
     const uploadImageData = new FormData();
     uploadImageData.append("imageFile", this.selectedFile, this.selectedFile.name);
 
-    this.imageService.uploadImage(uploadImageData).subscribe(() => { });
+    this.imageService.uploadImage(uploadImageData).subscribe(() => {
+      this.router.navigate(['/collection', this.Collection.name]);
+      this.resetCollection();
+    });
   }
 
   deleteImage() {

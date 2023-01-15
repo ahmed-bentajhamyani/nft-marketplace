@@ -1,47 +1,44 @@
 package ma.fstt.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import ma.fstt.model.Cart;
+import ma.fstt.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ma.fstt.model.Cart;
-import ma.fstt.repository.CartRepository;
+import java.util.List;
 
 @Service
 public class CartService {
-	
-	@Autowired
-	private CartRepository repository;
-	
-	 public List<Cart> getAllCarts() {
-	        return repository.findAll();
-	    }
-	 
-	
-	    public Optional<Cart> getCartById(String id) {
-	        return repository.findById(id);
-	    }
 
-	    public void createCart(Cart cart) {
-	    	repository.insert(cart);
-	    }
+    @Autowired
+    private CartRepository cartRepository;
 
-	    public Cart updateCart(String id, Cart cart) {
-	    	return repository.findById(id).map(x->{
-				x.setQuantity(cart.getQuantity());
-				x.setTotalPrice(cart.getTotalPrice());
-				return repository.save(x);
-			}).orElseGet(()->{
-				cart.setId(id);
-				return repository.save(cart);
-			});
-	    }
+    public List<Cart> getUserCarts(String walletAdress) {
+        return cartRepository.findCartsByWalletAddress(walletAdress);
+    }
 
-	    public void deleteCart(String id) {
-	        repository.deleteById(id);
-	    }
-	
+    public void createCart(Cart c) {
+        Cart cart = new Cart(c.getItemPrice(), c.getNftName(), c.getWalletAddress());
+        cartRepository.insert(cart);
+    }
 
+    public Cart updateCart(String id, Cart cart) {
+        return cartRepository.findById(id).map(c -> {
+            c.setItemPrice(cart.getItemPrice());
+            c.setNftName(cart.getNftName());
+            c.setWalletAddress(cart.getWalletAddress());
+            return cartRepository.save(c);
+        }).orElseGet(() -> {
+            cart.setId(id);
+            return cartRepository.save(cart);
+        });
+    }
+
+    public void deleteCart(String id) {
+        cartRepository.deleteById(id);
+    }
+
+    public void deleteAllCartsByWalletAddress(String walletAddress) {
+        cartRepository.deleteAllByWalletAddress(walletAddress);
+    }
 }

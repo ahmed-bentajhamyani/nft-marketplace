@@ -1,0 +1,5 @@
+ma\fstt\service\CollectionService.class
+ma\fstt\repository\CollectionRepository.class
+ma\fstt\CollectionServiceApplication.class
+ma\fstt\controller\CollectionController.class
+ma\fstt\model\Collection.class

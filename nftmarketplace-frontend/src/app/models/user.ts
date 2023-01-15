@@ -3,6 +3,6 @@ export interface User {
     username: string;
     email: string;
     profilePicture: String;
-    hash: string;
+    walletAddress: string;
     joinedAt: Date;
 }

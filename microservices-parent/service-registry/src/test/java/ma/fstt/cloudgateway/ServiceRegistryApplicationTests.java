@@ -1,4 +1,4 @@
-package ma.fstt.demo;
+package ma.fstt.cloudgateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

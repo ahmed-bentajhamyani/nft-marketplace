@@ -36,8 +36,8 @@ public class ImageService {
         }
     }
 
-    public void deleteImage(String id) {
-        imageRepository.deleteById(id);
+    public void deleteImage(String imageName) {
+        imageRepository.deleteImageByName(imageName);
     }
 
     // compress the image bytes before storing it in the database

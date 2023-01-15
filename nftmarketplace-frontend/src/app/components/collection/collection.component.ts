@@ -15,6 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 export class CollectionComponent {
   collection: any;
   nfts: any;
+  owner: any;
   user: any;
 
   retrieveResponse: any;
@@ -39,13 +40,17 @@ export class CollectionComponent {
       if (params['name']) {
         this.getCollectionByName(params['name']);
       }
-    })
+    });
+    if (sessionStorage.getItem('user')) {
+      this.user = sessionStorage.getItem('user');
+      this.user = JSON.parse(this.user);
+    }
   }
 
   getCollectionByName(name: any) {
     this.collectionService.getCollectionByName(name).subscribe(reponse => {
       this.collection = reponse;
-      this.getUserByHash();
+      this.getOwnerByWalletAddress();
       this.getCollectionImage(this.collection.imageName);
       this.getNftsByCollectionName(this.collection.name);
     })
@@ -76,10 +81,9 @@ export class CollectionComponent {
     });
   }
 
-  getUserByHash() {
-    this.userService.getUserByHash(this.collection.userHash).subscribe(response => {
-      this.user = response;
-      console.log(this.user);
+  getOwnerByWalletAddress() {
+    this.userService.getUserByWalletAddress(this.collection.walletAddress).subscribe(response => {
+      this.owner = response;
     })
   }
 

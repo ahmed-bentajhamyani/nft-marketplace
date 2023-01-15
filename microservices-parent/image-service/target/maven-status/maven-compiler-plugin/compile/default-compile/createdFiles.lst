@@ -1,0 +1,5 @@
+ma\fstt\controller\ImageController.class
+ma\fstt\ImageServiceApplication.class
+ma\fstt\repository\ImageRepository.class
+ma\fstt\service\ImageService.class
+ma\fstt\model\Image.class

@@ -1,0 +1,5 @@
+ma\fstt\NFTServiceApplication.class
+ma\fstt\controller\NFTController.class
+ma\fstt\model\NFT.class
+ma\fstt\repository\NFTRepository.class
+ma\fstt\service\NFTService.class
