@@ -228,7 +228,7 @@ spring:
             - Path=/api/image/**
 ```
 
-## Hardhat
+## Smart Contracts
 
 ### Testing Accounts
 
@@ -304,7 +304,7 @@ To create a collection you have to click the link in the navbar **create** and c
   <img width="960" alt="2" src="https://user-images.githubusercontent.com/101653735/212498909-541481d8-3daf-459d-83f0-80ef677e5579.png">
 </p>
 
-BLA BLA.
+The collection created successfully.
 
 <p align="center">
   <img width="960" alt="2" src="https://user-images.githubusercontent.com/101653735/212499164-18b307d8-6e7a-43f6-a64b-04ecc6257e1b.png">
@@ -334,7 +334,7 @@ Our NFT is created successfully.
   <img width="960" alt="9 III" src="https://user-images.githubusercontent.com/101653735/212499872-229627ba-94b7-4898-bacb-61c96a25d8ef.png">
 </p>
 
-And the transaction r, the hardhat tool provides a lot of information, which allows us to understand it  such us  address, it creates from whom to whom, and the  gas used.
+The transaction is added to the blockchain, and the hardhat tool provides information about it, which allows us to know the NFT created from whom to whom, and the  gas used.
 
 <p align="center">
   <img width="562" alt="9 IV" src="https://user-images.githubusercontent.com/101653735/212499929-c85fd98f-4f54-403b-bf73-b95e4f8a0f84.png">
