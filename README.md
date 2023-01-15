@@ -4,7 +4,7 @@
 
 # NFT Marketplace As Single Page Application
 
-In this project we develop a **web based DApp** NFTs Marketplace, in which the transactions are done through crypto currencies **Ethereum, bitcoin, etc** and the user.
+In this project we developed a **web based DApp** NFTs Marketplace, in which the transactions are done through crypto currencies **Ethereum, Bitcoin, etc...**, and the user.
 * Authenticates through an Ethereum wallet.
 * Can sell NFTs.
 * Proceed with NFTs Minting.
