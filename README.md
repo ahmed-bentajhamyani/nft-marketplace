@@ -13,6 +13,32 @@ The Marketplace based on hybrid architecture a NoSQL database **MongoDB** to sto
 
 **Tools :** Spring Boot, Microservices, Angular, MongoDB, Solidity , Ether.js, Hardhat, MetaMask, Devops : CI/CD, Docker, Github, Jenkins.
 
+## Table of contents
+[Class Diagram](#class-diagram)
+
+[Project Configuration](#project-configuration)
+* [Maven Project](#maven-project)
+* [Services](#services)
+* [Service Registry](#service-registry)
+* [Cloud Gateway](#cloud-gateway)
+
+[Smart Contracts](#smart-contracts)
+* [Testing Accounts](#testing-accounts)
+* [Smart Contract Deployment](#smart-contract-deployment)
+
+[Testing the Application](#testing-the-application)
+* [Home Page](#home-page)
+* [Connect Wallet](#connect-wallet)
+* [Update Account](#update-account)
+* [Create Collection](#create-collection)
+* [Create NFT](#create-nft)
+* [Edit NFT](#edit-nft)
+* [Buy NFT](#buy-nft)
+
+[DevOps : CI/CD](#devops--cicd)
+* [Angular Application](#angular-application)
+* [Spring Boot Application](#spring-boot-application)
+
 ## Class Diagram
 
 To effectively convey the dynamic nature of our application, we created a general class diagram. This diagram represents the abstraction of the application's functionality, allowing for a better understanding of the various interactions between classes. To organize NFTs, you can group them into collections and then categorize each collection. This allows you to interact with either individual NFTs or entire collections.
@@ -21,7 +47,7 @@ To effectively convey the dynamic nature of our application, we created a genera
 	<img width="902" alt="Class Diagram II" src="https://user-images.githubusercontent.com/101653735/212502917-a0462fbb-849e-4e12-91ec-00fc6b6f8981.png">
 </p>
 
-## Configuration
+## Project Configuration
 
 ### Maven Project
 
