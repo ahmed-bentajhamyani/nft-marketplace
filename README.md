@@ -290,7 +290,7 @@ And when you finish click **submit changes**.
   <img width="960" alt="2" src="https://user-images.githubusercontent.com/101653735/212498576-e07aadb7-bd54-45a9-acd5-e2f2fdf28912.png">
 </p>
 
-BLA BLA
+As you see the update applied on the database as well.
 
 <p align="center">
   <img width="755" alt="4 IV" src="https://user-images.githubusercontent.com/101653735/212502455-83dbbffc-22e0-4f46-9a0e-e4d96dbfed15.png">
@@ -310,7 +310,7 @@ The collection created successfully.
   <img width="960" alt="2" src="https://user-images.githubusercontent.com/101653735/212499164-18b307d8-6e7a-43f6-a64b-04ecc6257e1b.png">
 </p>
 
-BLA BLA
+And also a new document of the collection has created in our NoSQL database.
 
 <p align="center">
   <img width="753" alt="8 II" src="https://user-images.githubusercontent.com/101653735/212502398-abd833e8-f5cf-4e21-9cfd-d84470d003d5.png">
