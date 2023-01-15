@@ -39,6 +39,8 @@ The Marketplace based on hybrid architecture a NoSQL database **MongoDB** to sto
 * [Angular Application](#angular-application)
 * [Spring Boot Application](#spring-boot-application)
 
+[Creators](#creators)
+
 ## Class Diagram
 
 To effectively convey the dynamic nature of our application, we created a general class diagram. This diagram represents the abstraction of the application's functionality, allowing for a better understanding of the various interactions between classes. To organize NFTs, you can group them into collections and then categorize each collection. This allows you to interact with either individual NFTs or entire collections.
