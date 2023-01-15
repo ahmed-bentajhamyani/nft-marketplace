@@ -462,7 +462,7 @@ And the final configuration section is to specify the build steps.
 Our project is built successfully.
 
 <p align="center">
-	<img width="647" alt="4" src="(https://user-images.githubusercontent.com/101653735/212529939-f115fb54-83fa-4d31-a018-6a04aa13a499.png">
+	<img width="656" alt="6" src="https://user-images.githubusercontent.com/101653735/212537526-788a7edb-f5aa-47a3-bd57-a382e44e2c0b.png">
 </p>
 
 This is a dashboard of the last success, failure and duration of our projects
@@ -704,3 +704,5 @@ And we type the command **docker compose up -d**, as you can see all our service
 <p align="center">
 	<img width="920" alt="5" src="https://user-images.githubusercontent.com/101653735/212532025-ee4402d8-369e-407b-9852-c384b9fa9e75.png">
 </p>
+
+
